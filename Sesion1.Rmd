@@ -5,7 +5,7 @@ output: html_notebook
 
 En este taller veremos qué es R, como usarlo, manejar y visualizar datos entre otras cosas.
 
-Todos los recursos que usaremos en el taller estarán disponibles en el siguiente repositorio en Giuthub: https://github.com/mzambrano1/Taller-R-2023/tree/main
+Todos los recursos que usaremos en el taller estarán disponibles en el siguiente repositorio en Giuthub: <https://github.com/mzambrano1/Taller-R-2023/tree/main>
 
 
 ## Introducción a R
@@ -23,20 +23,66 @@ Fue desarrollado inicialmente por Robert Gentleman y Ross Ihaka del Departamento
 
 ## Instalación y uso de R
 
+- Para instalar R descargarlo del siguiente en lace: <https://cran.rstudio.com/>
+
+- Para descargar R studio: <https://www.rstudio.com/products/rstudio/download/#download>
+
+- R en la Nube: Otra opción es usar R en la nube con <https://posit.cloud/>, pero la versión gratuita da un tiempo limitado de uso al mes. 
 
 ## R markdown
 
+R markdown (como este documento que estamos usando) nos permite mezclar contenido multimedia (texto, imágenes) con código fuente ejecutable, como los jupyter notebooks. Esto se conoce como literate programming.
 
+En estos notebooks podemos combinar texto en formato de Markdown con bloques de código de R como el que tenemos a continuación:
 
+```{r}
+#soy un bloque de código
+print("Hola Mundo")
+```
+
+Los bloques de código están demarcados por un {r}  que lleva comillas antes y después. Para crear uno podemos simplemente escribir los carácteres necesarios o usar `Ctrl+Alt+i`.
+
+Para ejecutar el bloqué de código podemos usar los botones de la esquina superior deracha, `Ctrl+Shift+Enter` para correr todo el bloque o `Ctrl+Enter` para correr solo la lína actual.
 
 ## Operaciones 
 
-## Variabels, vectores y matrices
-
+En R podemos hacer operaciones matemáticas 
 
 ```{r}
-plot(cars)
+1+5
+2*3
+log(4)
 ```
+
+
+## Variabels, vectores y matrices
+
+Para asignar variables, podemos usar "<-" o "=". En R studio cada vez que asignamos una variable esta se agrega a la ventana "values" en la esquina superior derecha.
+
+```{r}
+a = 5
+b <- 3
+
+```
+
+Podemos crear vectores con "c()"
+
+```{r}
+c(1,3,4)
+
+c("e","f")
+
+c(a=1,b=2,c=3)
+```
+```{r}
+a <- c(a=1,b=2,c=3)
+
+a["a"]
+```
+```{r}
+
+```
+
 
 
 ## Dataframes
@@ -48,4 +94,5 @@ plot(cars)
 
 ## Instalación de librerías
 
+## Exportar el documento
 

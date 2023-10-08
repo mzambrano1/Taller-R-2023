@@ -1775,20 +1775,100 @@ de la combinación de dos lenguajes S y Scheme.</p>
 </div>
 <div id="instalación-y-uso-de-r" class="section level2">
 <h2>Instalación y uso de R</h2>
+<ul>
+<li><p>Para instalar R descargarlo del siguiente en lace: <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a></p></li>
+<li><p>Para descargar R studio: <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></p></li>
+<li><p>R en la Nube: Otra opción es usar R en la nube con <a href="https://posit.cloud/" class="uri">https://posit.cloud/</a>, pero
+la versión gratuita da un tiempo limitado de uso al mes.</p></li>
+</ul>
 </div>
 <div id="r-markdown" class="section level2">
 <h2>R markdown</h2>
+<p>R markdown (como este documento que estamos usando) nos permite
+mezclar contenido multimedia (texto, imágenes) con código fuente
+ejecutable, como los jupyter notebooks. Esto se conoce como literate
+programming.</p>
+<p>En estos notebooks podemos combinar texto en formato de Markdown con
+bloques de código de R como el que tenemos a continuación:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NveSB1biBibG9xdWUgZGUgY8OzZGlnb1xucHJpbnQoXCJIb2xhIE11bmRvXCIpXG5gYGAifQ== -->
+<pre class="r"><code>#soy un bloque de código
+print(&quot;Hola Mundo&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSG9sYSBNdW5kb1wiXG4ifQ== -->
+<pre><code>[1] &quot;Hola Mundo&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Los bloques de código están demarcados por un {r} que lleva comillas
+antes y después. Para crear uno podemos simplemente escribir los
+carácteres necesarios o usar <code>Ctrl+Alt+i</code>.</p>
+<p>Para ejecutar el bloqué de código podemos usar los botones de la
+esquina superior deracha, <code>Ctrl+Shift+Enter</code> para correr todo
+el bloque o <code>Ctrl+Enter</code> para correr solo la lína actual.</p>
 </div>
 <div id="operaciones" class="section level2">
 <h2>Operaciones</h2>
+<p>En R podemos hacer operaciones matemáticas</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMSs1XG4yKjNcbmxvZyg0KVxuYGBgIn0= -->
+<pre class="r"><code>1+5
+2*3
+log(4)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
 <div id="variabels-vectores-y-matrices" class="section level2">
 <h2>Variabels, vectores y matrices</h2>
+<p>Para asignar variables, podemos usar “&lt;-” o “=”. En R studio cada
+vez que asignamos una variable esta se agrega a la ventana “values” en
+la esquina superior derecha.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA9IDVcbmIgPC0gM1xuXG5gYGAifQ== -->
+<pre class="r"><code>a = 5
+b &lt;- 3
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Podemos crear vectores con “c()”</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYygxLDMsNClcbmBgYCJ9 -->
+<pre class="r"><code>c(1,3,4)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEgMyA0XG4ifQ== -->
+<pre><code>[1] 1 3 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYyhcImVcIixcImZcIilcbmBgYCJ9 -->
+<pre class="r"><code>c(&quot;e&quot;,&quot;f&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZVwiIFwiZlwiXG4ifQ== -->
+<pre><code>[1] &quot;e&quot; &quot;f&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYyhhPTEsYj0yLGM9MylcbmBgYCJ9 -->
+<pre class="r"><code>c(a=1,b=2,c=3)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYSBiIGMgXG4xIDIgMyBcbiJ9 -->
+<pre><code>a b c 
+1 2 3 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYVtcImFcIl1cblxuYGBgIn0= -->
+<pre class="r"><code>a[&quot;a&quot;]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYSBcbjEgXG4ifQ== -->
+<pre><code>a 
+1 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1800,10 +1880,13 @@ de la combinación de dos lenguajes S y Scheme.</p>
 </div>
 <div id="instalación-de-librerías" class="section level2">
 <h2>Instalación de librerías</h2>
+</div>
+<div id="exportar-el-documento" class="section level2">
+<h2>Exportar el documento</h2>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRhbGxlciBSOiBTZXNpw7NuIDEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpFbiBlc3RlIHRhbGxlciB2ZXJlbW9zIHF1w6kgZXMgUiwgY29tbyB1c2FybG8sIG1hbmVqYXIgeSB2aXN1YWxpemFyIGRhdG9zIGVudHJlIG90cmFzIGNvc2FzLg0KDQpUb2RvcyBsb3MgcmVjdXJzb3MgcXVlIHVzYXJlbW9zIGVuIGVsIHRhbGxlciBlc3RhcsOhbiBkaXNwb25pYmxlcyBlbiBlbCBzaWd1aWVudGUgcmVwb3NpdG9yaW8gZW4gR2l1dGh1YjogaHR0cHM6Ly9naXRodWIuY29tL216YW1icmFubzEvVGFsbGVyLVItMjAyMy90cmVlL21haW4NCg0KDQojIyBJbnRyb2R1Y2Npw7NuIGEgUg0KDQotIFIgZXMgdW4gZW50b3JubyB5IGxlbmd1YWplIGRlIHByb2dyYW1hY2nDs24gY29uIHVuIGVuZm9xdWUgYWwgYW7DoWxpc2lzIGVzdGFkw61zdGljby4gRXMgdW4gbGVuZ3VhamUgZGUgcHJvZ3JhbWFjacOzbiBjb21wbGV0bywgc2UgcHVlZGVuIGNyZWFyIHZhcmlhYmxlcywgbG9vcHMsIGZ1bmNpb25lcywgZXRjLg0KDQotIFBlcmltdGUgbWFuaXB1bGFyIGRhdG9zIGRlIG1hbmVyYSBzZW5jaWxsYSBlIGVmaWNpZW50ZS4NCg0KLSBQcm9wb3JjaW9uYSB1bmEgYW1wbGlhIHZhcmllZGFkIGRlIG3DqXRvZG9zIHBhcmEgZWwgYW7DoWxpc2lzIGVzdGFkw61zdGljbywgYWxnb3JpdG1vcyBkZSBjbGFzaWZpY2lhY2nDs24sIHZpc3VhbGl6YWNpb25lcy4NCg0KIyMjIFVuIHBvcXVpdG8gZGUgaGlzdG9yaWENCg0KRnVlIGRlc2Fycm9sbGFkbyBpbmljaWFsbWVudGUgcG9yIFJvYmVydCBHZW50bGVtYW4geSBSb3NzIEloYWthIGRlbCBEZXBhcnRhbWVudG8gZGUgRXN0YWTDrXN0aWNhIGRlIGxhIFVuaXZlcnNpZGFkIGRlIEF1Y2tsYW5kIGVuIDE5OTMuIFZpZW5lIGRlIGxhIGNvbWJpbmFjacOzbiBkZSBkb3MgbGVuZ3VhamVzIFMgeSBTY2hlbWUuDQoNCg0KIyMgSW5zdGFsYWNpw7NuIHkgdXNvIGRlIFINCg0KDQojIyBSIG1hcmtkb3duDQoNCg0KDQoNCiMjIE9wZXJhY2lvbmVzIA0KDQojIyBWYXJpYWJlbHMsIHZlY3RvcmVzIHkgbWF0cmljZXMNCg0KDQpgYGB7cn0NCnBsb3QoY2FycykNCmBgYA0KDQoNCiMjIERhdGFmcmFtZXMNCg0KDQojIyBMb29wcw0KDQoNCg0KIyMgSW5zdGFsYWNpw7NuIGRlIGxpYnJlcsOtYXMNCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRhbGxlciBSOiBTZXNpw7NuIDEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpFbiBlc3RlIHRhbGxlciB2ZXJlbW9zIHF1w6kgZXMgUiwgY29tbyB1c2FybG8sIG1hbmVqYXIgeSB2aXN1YWxpemFyIGRhdG9zIGVudHJlIG90cmFzIGNvc2FzLg0KDQpUb2RvcyBsb3MgcmVjdXJzb3MgcXVlIHVzYXJlbW9zIGVuIGVsIHRhbGxlciBlc3RhcsOhbiBkaXNwb25pYmxlcyBlbiBlbCBzaWd1aWVudGUgcmVwb3NpdG9yaW8gZW4gR2l1dGh1YjogPGh0dHBzOi8vZ2l0aHViLmNvbS9temFtYnJhbm8xL1RhbGxlci1SLTIwMjMvdHJlZS9tYWluPg0KDQoNCiMjIEludHJvZHVjY2nDs24gYSBSDQoNCi0gUiBlcyB1biBlbnRvcm5vIHkgbGVuZ3VhamUgZGUgcHJvZ3JhbWFjacOzbiBjb24gdW4gZW5mb3F1ZSBhbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLiBFcyB1biBsZW5ndWFqZSBkZSBwcm9ncmFtYWNpw7NuIGNvbXBsZXRvLCBzZSBwdWVkZW4gY3JlYXIgdmFyaWFibGVzLCBsb29wcywgZnVuY2lvbmVzLCBldGMuDQoNCi0gUGVyaW10ZSBtYW5pcHVsYXIgZGF0b3MgZGUgbWFuZXJhIHNlbmNpbGxhIGUgZWZpY2llbnRlLg0KDQotIFByb3BvcmNpb25hIHVuYSBhbXBsaWEgdmFyaWVkYWQgZGUgbcOpdG9kb3MgcGFyYSBlbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLCBhbGdvcml0bW9zIGRlIGNsYXNpZmljaWFjacOzbiwgdmlzdWFsaXphY2lvbmVzLg0KDQojIyMgVW4gcG9xdWl0byBkZSBoaXN0b3JpYQ0KDQpGdWUgZGVzYXJyb2xsYWRvIGluaWNpYWxtZW50ZSBwb3IgUm9iZXJ0IEdlbnRsZW1hbiB5IFJvc3MgSWhha2EgZGVsIERlcGFydGFtZW50byBkZSBFc3RhZMOtc3RpY2EgZGUgbGEgVW5pdmVyc2lkYWQgZGUgQXVja2xhbmQgZW4gMTk5My4gVmllbmUgZGUgbGEgY29tYmluYWNpw7NuIGRlIGRvcyBsZW5ndWFqZXMgUyB5IFNjaGVtZS4NCg0KDQojIyBJbnN0YWxhY2nDs24geSB1c28gZGUgUg0KDQotIFBhcmEgaW5zdGFsYXIgUiBkZXNjYXJnYXJsbyBkZWwgc2lndWllbnRlIGVuIGxhY2U6IDxodHRwczovL2NyYW4ucnN0dWRpby5jb20vPg0KDQotIFBhcmEgZGVzY2FyZ2FyIFIgc3R1ZGlvOiA8aHR0cHM6Ly93d3cucnN0dWRpby5jb20vcHJvZHVjdHMvcnN0dWRpby9kb3dubG9hZC8jZG93bmxvYWQ+DQoNCi0gUiBlbiBsYSBOdWJlOiBPdHJhIG9wY2nDs24gZXMgdXNhciBSIGVuIGxhIG51YmUgY29uIDxodHRwczovL3Bvc2l0LmNsb3VkLz4sIHBlcm8gbGEgdmVyc2nDs24gZ3JhdHVpdGEgZGEgdW4gdGllbXBvIGxpbWl0YWRvIGRlIHVzbyBhbCBtZXMuIA0KDQojIyBSIG1hcmtkb3duDQoNClIgbWFya2Rvd24gKGNvbW8gZXN0ZSBkb2N1bWVudG8gcXVlIGVzdGFtb3MgdXNhbmRvKSBub3MgcGVybWl0ZSBtZXpjbGFyIGNvbnRlbmlkbyBtdWx0aW1lZGlhICh0ZXh0bywgaW3DoWdlbmVzKSBjb24gY8OzZGlnbyBmdWVudGUgZWplY3V0YWJsZSwgY29tbyBsb3MganVweXRlciBub3RlYm9va3MuIEVzdG8gc2UgY29ub2NlIGNvbW8gbGl0ZXJhdGUgcHJvZ3JhbW1pbmcuDQoNCkVuIGVzdG9zIG5vdGVib29rcyBwb2RlbW9zIGNvbWJpbmFyIHRleHRvIGVuIGZvcm1hdG8gZGUgTWFya2Rvd24gY29uIGJsb3F1ZXMgZGUgY8OzZGlnbyBkZSBSIGNvbW8gZWwgcXVlIHRlbmVtb3MgYSBjb250aW51YWNpw7NuOg0KDQpgYGB7cn0NCiNzb3kgdW4gYmxvcXVlIGRlIGPDs2RpZ28NCnByaW50KCJIb2xhIE11bmRvIikNCmBgYA0KDQpMb3MgYmxvcXVlcyBkZSBjw7NkaWdvIGVzdMOhbiBkZW1hcmNhZG9zIHBvciB1biB7cn0gIHF1ZSBsbGV2YSBjb21pbGxhcyBhbnRlcyB5IGRlc3B1w6lzLiBQYXJhIGNyZWFyIHVubyBwb2RlbW9zIHNpbXBsZW1lbnRlIGVzY3JpYmlyIGxvcyBjYXLDoWN0ZXJlcyBuZWNlc2FyaW9zIG8gdXNhciBgQ3RybCtBbHQraWAuDQoNClBhcmEgZWplY3V0YXIgZWwgYmxvcXXDqSBkZSBjw7NkaWdvIHBvZGVtb3MgdXNhciBsb3MgYm90b25lcyBkZSBsYSBlc3F1aW5hIHN1cGVyaW9yIGRlcmFjaGEsIGBDdHJsK1NoaWZ0K0VudGVyYCBwYXJhIGNvcnJlciB0b2RvIGVsIGJsb3F1ZSBvIGBDdHJsK0VudGVyYCBwYXJhIGNvcnJlciBzb2xvIGxhIGzDrW5hIGFjdHVhbC4NCg0KIyMgT3BlcmFjaW9uZXMgDQoNCkVuIFIgcG9kZW1vcyBoYWNlciBvcGVyYWNpb25lcyBtYXRlbcOhdGljYXMgDQoNCmBgYHtyfQ0KMSs1DQoyKjMNCmxvZyg0KQ0KYGBgDQoNCg0KIyMgVmFyaWFiZWxzLCB2ZWN0b3JlcyB5IG1hdHJpY2VzDQoNClBhcmEgYXNpZ25hciB2YXJpYWJsZXMsIHBvZGVtb3MgdXNhciAiPC0iIG8gIj0iLiBFbiBSIHN0dWRpbyBjYWRhIHZleiBxdWUgYXNpZ25hbW9zIHVuYSB2YXJpYWJsZSBlc3RhIHNlIGFncmVnYSBhIGxhIHZlbnRhbmEgInZhbHVlcyIgZW4gbGEgZXNxdWluYSBzdXBlcmlvciBkZXJlY2hhLg0KDQpgYGB7cn0NCmEgPSA1DQpiIDwtIDMNCg0KYGBgDQoNClBvZGVtb3MgY3JlYXIgdmVjdG9yZXMgY29uICJjKCkiDQoNCmBgYHtyfQ0KYygxLDMsNCkNCg0KYygiZSIsImYiKQ0KDQpjKGE9MSxiPTIsYz0zKQ0KYGBgDQpgYGB7cn0NCmEgPC0gYyhhPTEsYj0yLGM9MykNCg0KYVsiYSJdDQpgYGANCmBgYHtyfQ0KDQpgYGANCg0KDQoNCiMjIERhdGFmcmFtZXMNCg0KDQojIyBMb29wcw0KDQoNCg0KIyMgSW5zdGFsYWNpw7NuIGRlIGxpYnJlcsOtYXMNCg0KIyMgRXhwb3J0YXIgZWwgZG9jdW1lbnRvDQoNCg==</div>
 
 
 
