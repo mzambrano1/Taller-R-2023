@@ -1,0 +1,51 @@
+---
+title: "Taller R: Sesión 1"
+output: html_notebook
+---
+
+En este taller veremos qué es R, como usarlo, manejar y visualizar datos entre otras cosas.
+
+Todos los recursos que usaremos en el taller estarán disponibles en el siguiente repositorio en Giuthub: https://github.com/mzambrano1/Taller-R-2023/tree/main
+
+
+## Introducción a R
+
+- R es un entorno y lenguaje de programación con un enfoque al análisis estadístico. Es un lenguaje de programación completo, se pueden crear variables, loops, funciones, etc.
+
+- Perimte manipular datos de manera sencilla e eficiente.
+
+- Proporciona una amplia variedad de métodos para el análisis estadístico, algoritmos de clasificiación, visualizaciones.
+
+### Un poquito de historia
+
+Fue desarrollado inicialmente por Robert Gentleman y Ross Ihaka del Departamento de Estadística de la Universidad de Auckland en 1993. Viene de la combinación de dos lenguajes S y Scheme.
+
+
+## Instalación y uso de R
+
+
+## R markdown
+
+
+
+
+## Operaciones 
+
+## Variabels, vectores y matrices
+
+
+```{r}
+plot(cars)
+```
+
+
+## Dataframes
+
+
+## Loops
+
+
+
+## Instalación de librerías
+
+
