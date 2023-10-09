@@ -1,6 +1,15 @@
 ---
 title: "Taller R: Sesión 1"
-output: html_notebook
+output:
+  html_document:
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+  pdf_document:
+    toc: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 En este taller veremos qué es R, como usarlo, manejar y visualizar datos entre otras cosas.
@@ -8,7 +17,7 @@ En este taller veremos qué es R, como usarlo, manejar y visualizar datos entre 
 Todos los recursos que usaremos en el taller estarán disponibles en el siguiente repositorio en Giuthub: <https://github.com/mzambrano1/Taller-R-2023/tree/main>
 
 
-## Introducción a R
+# Introducción a R
 
 - R es un entorno y lenguaje de programación con un enfoque al análisis estadístico. Es un lenguaje de programación completo, se pueden crear variables, loops, funciones, etc.
 
@@ -16,12 +25,12 @@ Todos los recursos que usaremos en el taller estarán disponibles en el siguient
 
 - Proporciona una amplia variedad de métodos para el análisis estadístico, algoritmos de clasificiación, visualizaciones.
 
-### Un poquito de historia
+## Un poquito de historia
 
 Fue desarrollado inicialmente por Robert Gentleman y Ross Ihaka del Departamento de Estadística de la Universidad de Auckland en 1993. Viene de la combinación de dos lenguajes S y Scheme.
 
 
-## Instalación y uso de R
+# Instalación y uso de R
 
 - Para instalar R descargarlo del siguiente en lace: <https://cran.rstudio.com/>
 
@@ -29,7 +38,7 @@ Fue desarrollado inicialmente por Robert Gentleman y Ross Ihaka del Departamento
 
 - R en la Nube: Otra opción es usar R en la nube con <https://posit.cloud/>, pero la versión gratuita da un tiempo limitado de uso al mes. 
 
-## R markdown
+# R markdown
 
 R markdown (como este documento que estamos usando) nos permite mezclar contenido multimedia (texto, imágenes) con código fuente ejecutable, como los jupyter notebooks. Esto se conoce como literate programming.
 
@@ -44,7 +53,25 @@ Los bloques de código están demarcados por un {r}  que lleva comillas antes y 
 
 Para ejecutar el bloqué de código podemos usar los botones de la esquina superior deracha, `Ctrl+Shift+Enter` para correr todo el bloque o `Ctrl+Enter` para correr solo la lína actual.
 
-## Operaciones 
+
+
+# Instalación de librerías
+
+Para instalar librerías usamos el comando install.packages('nombre librería'). Por ejemplo:
+
+```{r, eval=F, message=F}
+install.packages("ggplot2")
+```
+Recomendación: instalar R tools <https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html>
+
+A veces causan errores raros, la mejor recomendación: Buscar en google.
+
+# Exportar el documento
+
+Para exportar este documento a otros formatos: file -> Knit Document, o también 'Ctrl+Shift+K'. Esto generará una versión HTML del notebook.
+
+
+# Operaciones 
 
 En R podemos hacer operaciones matemáticas 
 
@@ -55,7 +82,7 @@ log(4)
 ```
 
 
-## Variabels, vectores y matrices
+# Variables y vectores
 
 Para asignar variables, podemos usar "<-" o "=". En R studio cada vez que asignamos una variable esta se agrega a la ventana "values" en la esquina superior derecha.
 
@@ -74,25 +101,141 @@ c("e","f")
 
 c(a=1,b=2,c=3)
 ```
+Podemos acceder a los valores con su índice. **Importante: En R los índices empiezan en 1**
+
+```{r}
+a <- c(1,3,4)
+
+a[1]
+
+```
+También le podemos asignar nombres a los valores del vector.
+
 ```{r}
 a <- c(a=1,b=2,c=3)
 
 a["a"]
 ```
+
+
+
 ```{r}
 
+a <- c(1,2,3)
+
+b <- c(a,4,5,6)
+
+```
+
+y podemos hacer operaciones con ellos.
+
+```{r}
+mean(b)
+length(b)
+sum(b)
+b*3
+b+1
+```
+
+
+Algunas formas de crear vectores
+
+```{r}
+#Vector con valores del 1 al 10
+seq(1, 10)
+
+#Vector que va de 1 a 9, cada 2
+seq(1, 10, 2)
+
+#Repetir un valor cierta cantidad de veces
+rep(8,3)
+
+```
+
+Comparar valores
+
+```{r}
+r <- c(1,2,3,4,5,6)
+r < 4
+```
+También podemos generar vectores aleatorios con nuestra distribución de probabilidad favorita:
+
+```{r}
+rnorm(5)
+
+rpois(10,2)
+```
+
+
+# Loops
+
+Como cualquier lenguaje de programación que se respete, en R podemos hacer ciclos for y While.
+
+```{r}
+for (i in 1:10) {
+  print (i)
+}
+```
+
+
+```{r}
+for (i in c(1,2,3,4,5)) {
+print(i)
+}
+```
+
+```{r}
+i <- 0
+while ( i < 10) {
+    i <- i+1
+    print(i)
+}
+```
+```{r}
+i <- 0
+while (TRUE) {
+  if (i == 10) 
+    break
+  else {
+    i <- i+1
+    print(i)
+  }    
+}
+```
+
+
+# Dataframes
+
+Como donde más se usa R es para en análisis de estadístico, minería de datos, etc. es importante saber manejar datos. 
+
+Para esto la estructura estrella son los data frames. Estos son estructuras de datos de dos dimensiones (una tabla) que nos sirven para guardar datos, los que pueden ser de distinto tipo.
+
+```{r}
+alumnos <- data.frame(nombre = c("Pepito", "Pepita", "Juan"), edad = c(20, 22, 18), cursos= rep(6,3))
+
+# Muestra todo el data frame
+alumnos
+```
+
+
+Podemos seleccionar una columna:
+
+```{r}
+alumnos$nombre
+alumnos['edad']
+```
+
+```{r}
+ncol(alumnos)
+nrow(alumnos)
+```
+
+
+```{r}
+dim(alumnos)
 ```
 
 
 
-## Dataframes
 
-
-## Loops
-
-
-
-## Instalación de librerías
-
-## Exportar el documento
 

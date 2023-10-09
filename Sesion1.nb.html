@@ -1756,8 +1756,8 @@ display: none;
 datos entre otras cosas.</p>
 <p>Todos los recursos que usaremos en el taller estarán disponibles en
 el siguiente repositorio en Giuthub: <a href="https://github.com/mzambrano1/Taller-R-2023/tree/main" class="uri">https://github.com/mzambrano1/Taller-R-2023/tree/main</a></p>
-<div id="introducción-a-r" class="section level2">
-<h2>Introducción a R</h2>
+<div id="introducción-a-r" class="section level1">
+<h1>Introducción a R</h1>
 <ul>
 <li><p>R es un entorno y lenguaje de programación con un enfoque al
 análisis estadístico. Es un lenguaje de programación completo, se pueden
@@ -1766,15 +1766,15 @@ crear variables, loops, funciones, etc.</p></li>
 <li><p>Proporciona una amplia variedad de métodos para el análisis
 estadístico, algoritmos de clasificiación, visualizaciones.</p></li>
 </ul>
-<div id="un-poquito-de-historia" class="section level3">
-<h3>Un poquito de historia</h3>
+<div id="un-poquito-de-historia" class="section level2">
+<h2>Un poquito de historia</h2>
 <p>Fue desarrollado inicialmente por Robert Gentleman y Ross Ihaka del
 Departamento de Estadística de la Universidad de Auckland en 1993. Viene
 de la combinación de dos lenguajes S y Scheme.</p>
 </div>
 </div>
-<div id="instalación-y-uso-de-r" class="section level2">
-<h2>Instalación y uso de R</h2>
+<div id="instalación-y-uso-de-r" class="section level1">
+<h1>Instalación y uso de R</h1>
 <ul>
 <li><p>Para instalar R descargarlo del siguiente en lace: <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a></p></li>
 <li><p>Para descargar R studio: <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></p></li>
@@ -1782,8 +1782,8 @@ de la combinación de dos lenguajes S y Scheme.</p>
 la versión gratuita da un tiempo limitado de uso al mes.</p></li>
 </ul>
 </div>
-<div id="r-markdown" class="section level2">
-<h2>R markdown</h2>
+<div id="r-markdown" class="section level1">
+<h1>R markdown</h1>
 <p>R markdown (como este documento que estamos usando) nos permite
 mezclar contenido multimedia (texto, imágenes) con código fuente
 ejecutable, como los jupyter notebooks. Esto se conoce como literate
@@ -1808,8 +1808,29 @@ carácteres necesarios o usar <code>Ctrl+Alt+i</code>.</p>
 esquina superior deracha, <code>Ctrl+Shift+Enter</code> para correr todo
 el bloque o <code>Ctrl+Enter</code> para correr solo la lína actual.</p>
 </div>
-<div id="operaciones" class="section level2">
-<h2>Operaciones</h2>
+<div id="instalación-de-librerías" class="section level1">
+<h1>Instalación de librerías</h1>
+<p>Para instalar librerías usamos el comando install.packages(‘nombre
+librería’). Por ejemplo:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiaW5zdGFsbC5wYWNrYWdlcyhcImdncGxvdDJcIikifQ== -->
+<pre class="r"><code>install.packages(&quot;ggplot2&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Recomendación: instalar R tools <a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html" class="uri">https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html</a></p>
+<p>A veces causan errores raros, la mejor recomendación: Buscar en
+google.</p>
+</div>
+<div id="exportar-el-documento" class="section level1">
+<h1>Exportar el documento</h1>
+<p>Para exportar este documento a otros formatos: file -&gt; Knit
+Document, o también ‘Ctrl+Shift+K’. Esto generará una versión HTML del
+notebook.</p>
+</div>
+<div id="operaciones" class="section level1">
+<h1>Operaciones</h1>
 <p>En R podemos hacer operaciones matemáticas</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -1821,8 +1842,8 @@ log(4)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="variabels-vectores-y-matrices" class="section level2">
-<h2>Variabels, vectores y matrices</h2>
+<div id="variables-y-vectores" class="section level1">
+<h1>Variables y vectores</h1>
 <p>Para asignar variables, podemos usar “&lt;-” o “=”. En R studio cada
 vez que asignamos una variable esta se agrega a la ventana “values” en
 la esquina superior derecha.</p>
@@ -1858,6 +1879,10 @@ b &lt;- 3
 1 2 3 </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Podemos acceder a los valores con su índice. <strong>Importante: En R
+los índices empiezan en 1</strong></p>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYVtcImFcIl1cblxuYGBgIn0= -->
 <pre class="r"><code>a[&quot;a&quot;]
@@ -1868,25 +1893,222 @@ b &lt;- 3
 1 </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>También le podemos asignar nombres a los valores del vector.</p>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSBjKGE9MSxiPTIsYz0zKVxuXG5hW1wiYVwiXVxuYGBgIn0= -->
+<pre class="r"><code>a &lt;- c(a=1,b=2,c=3)
+
+a[&quot;a&quot;]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5hIDwtIGMoMSwyLDMpXG5cbmIgPC0gYyhhLDQsNSw2KVxuXG5gYGAifQ== -->
+<pre class="r"><code>
+a &lt;- c(1,2,3)
+
+b &lt;- c(a,4,5,6)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>y podemos hacer operaciones con ellos.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbihiKVxuYGBgIn0= -->
+<pre class="r"><code>mean(b)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDNcbiJ9 -->
+<pre><code>[1] 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGVuZ3RoKGIpXG5gYGAifQ== -->
+<pre class="r"><code>length(b)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcbiJ9 -->
+<pre><code>[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGIpXG5gYGAifQ== -->
+<pre class="r"><code>sum(b)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDNcbiJ9 -->
+<pre><code>[1] 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYiozXG5gYGAifQ== -->
+<pre class="r"><code>b*3</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDlcbiJ9 -->
+<pre><code>[1] 9</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYisxXG5gYGAifQ== -->
+<pre class="r"><code>b+1</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDRcbiJ9 -->
+<pre><code>[1] 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Algunas formas de crear vectores</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ZlY3RvciBjb24gdmFsb3JlcyBkZWwgMSBhbCAxMFxuc2VxKDEsIDEwKVxuXG4jVmVjdG9yIHF1ZSB2YSBkZSAxIGEgOSwgY2FkYSAyXG5zZXEoMSwgMTAsIDIpXG5cbiNSZXBldGlyIHVuIHZhbG9yIGNpZXJ0YSBjYW50aWRhZCBkZSB2ZWNlc1xucmVwKDgsMylcblxuYGBgIn0= -->
+<pre class="r"><code>#Vector con valores del 1 al 10
+seq(1, 10)
+
+#Vector que va de 1 a 9, cada 2
+seq(1, 10, 2)
+
+#Repetir un valor cierta cantidad de veces
+rep(8,3)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Comparar valores</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuciA8IGMoMCw4KVxuXG5gYGAifQ== -->
+<pre class="r"><code>r &lt; c(0,8)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFICBUUlVFIEZBTFNFICBUUlVFIEZBTFNFICBUUlVFXG4ifQ== -->
+<pre><code>[1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>También podemos generar vectores aleatorios con nuestra distribución
+de probabilidad favorita:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnBvaXMoMTAsMilcblxuYGBgIn0= -->
+<pre class="r"><code>rpois(10,2)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAyIDEgMSAzIDIgMSAxIDUgNSAxXG4ifQ== -->
+<pre><code> [1] 2 1 1 3 2 1 1 5 5 1</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="dataframes" class="section level2">
-<h2>Dataframes</h2>
+<div id="loops" class="section level1">
+<h1>Loops</h1>
+<p>Como cualquier lenguaje de programación que se respete, en R podemos
+hacer ciclos for y While.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIDE6MTApIHtcbiAgcHJpbnQgKGkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>for (i in 1:10) {
+  print (i)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIGMoMSwyLDMsNCw1KSkge1xucHJpbnQoaSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>for (i in c(1,2,3,4,5)) {
+print(i)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaSA8LSAwXG53aGlsZSAoIGkgPCAxMCkge1xuICAgIGkgPC0gaSsxXG4gICAgcHJpbnQoaSlcbiAgIFxufVxuYGBgIn0= -->
+<pre class="r"><code>i &lt;- 0
+while ( i &lt; 10) {
+    i &lt;- i+1
+    print(i)
+   
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcblsxXSAyXG5bMV0gM1xuWzFdIDRcblsxXSA1XG5bMV0gNlxuWzFdIDdcblsxXSA4XG5bMV0gOVxuWzFdIDEwXG4ifQ== -->
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaSA8LSAwXG53aGlsZSAoVFJVRSkge1xuICBpZiAoaSA9PSAxMCkgXG4gICAgYnJlYWtcbiAgZWxzZSB7XG4gICAgaSA8LSBpKzFcbiAgICBwcmludChpKVxuICB9ICAgIFxufVxuYGBgIn0= -->
+<pre class="r"><code>i &lt;- 0
+while (TRUE) {
+  if (i == 10) 
+    break
+  else {
+    i &lt;- i+1
+    print(i)
+  }    
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcblsxXSAyXG5bMV0gM1xuWzFdIDRcblsxXSA1XG5bMV0gNlxuWzFdIDdcblsxXSA4XG5bMV0gOVxuWzFdIDEwXG4ifQ== -->
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
-<div id="loops" class="section level2">
-<h2>Loops</h2>
-</div>
-<div id="instalación-de-librerías" class="section level2">
-<h2>Instalación de librerías</h2>
-</div>
-<div id="exportar-el-documento" class="section level2">
-<h2>Exportar el documento</h2>
+<div id="dataframes" class="section level1">
+<h1>Dataframes</h1>
+<p>Como donde más se usa R es para en análisis de estadístico, minería
+de datos, etc. es importante saber manejar datos.</p>
+<p>Para esto la estructura estrella son los data frames. Estos son
+estructuras de datos de dos dimensiones (una tabla) que nos sirven para
+guardar datos, los que pueden ser de distinto tipo.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWx1bW5vcyA8LSBkYXRhLmZyYW1lKG5vbWJyZSA9IGMoXCJQZXBpdG9cIiwgXCJQZXBpdGFcIiwgXCJKdWFuXCIpLCBlZGFkID0gYygyMCwgMjIsIDE4KSwgY3Vyc29zPSByZXAoNiwzKSlcblxuIyBNdWVzdHJhIHRvZG8gZWwgZGF0YSBmcmFtZVxuYWx1bW5vc1xuYGBgIn0= -->
+<pre class="r"><code>alumnos &lt;- data.frame(nombre = c(&quot;Pepito&quot;, &quot;Pepita&quot;, &quot;Juan&quot;), edad = c(20, 22, 18), cursos= rep(6,3))
+
+# Muestra todo el data frame
+alumnos</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Podemos seleccionar una columna:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWx1bW5vcyRub21icmVcbmFsdW1ub3NbJ2VkYWQnXVxuYGBgIn0= -->
+<pre class="r"><code>alumnos$nombre
+alumnos[&#39;edad&#39;]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmNvbChhbHVtbm9zKVxubnJvdyhhbHVtbm9zKVxuYGBgIn0= -->
+<pre class="r"><code>ncol(alumnos)
+nrow(alumnos)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGltKGFsdW1ub3MpXG5gYGAifQ== -->
+<pre class="r"><code>dim(alumnos)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRhbGxlciBSOiBTZXNpw7NuIDEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpFbiBlc3RlIHRhbGxlciB2ZXJlbW9zIHF1w6kgZXMgUiwgY29tbyB1c2FybG8sIG1hbmVqYXIgeSB2aXN1YWxpemFyIGRhdG9zIGVudHJlIG90cmFzIGNvc2FzLg0KDQpUb2RvcyBsb3MgcmVjdXJzb3MgcXVlIHVzYXJlbW9zIGVuIGVsIHRhbGxlciBlc3RhcsOhbiBkaXNwb25pYmxlcyBlbiBlbCBzaWd1aWVudGUgcmVwb3NpdG9yaW8gZW4gR2l1dGh1YjogPGh0dHBzOi8vZ2l0aHViLmNvbS9temFtYnJhbm8xL1RhbGxlci1SLTIwMjMvdHJlZS9tYWluPg0KDQoNCiMjIEludHJvZHVjY2nDs24gYSBSDQoNCi0gUiBlcyB1biBlbnRvcm5vIHkgbGVuZ3VhamUgZGUgcHJvZ3JhbWFjacOzbiBjb24gdW4gZW5mb3F1ZSBhbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLiBFcyB1biBsZW5ndWFqZSBkZSBwcm9ncmFtYWNpw7NuIGNvbXBsZXRvLCBzZSBwdWVkZW4gY3JlYXIgdmFyaWFibGVzLCBsb29wcywgZnVuY2lvbmVzLCBldGMuDQoNCi0gUGVyaW10ZSBtYW5pcHVsYXIgZGF0b3MgZGUgbWFuZXJhIHNlbmNpbGxhIGUgZWZpY2llbnRlLg0KDQotIFByb3BvcmNpb25hIHVuYSBhbXBsaWEgdmFyaWVkYWQgZGUgbcOpdG9kb3MgcGFyYSBlbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLCBhbGdvcml0bW9zIGRlIGNsYXNpZmljaWFjacOzbiwgdmlzdWFsaXphY2lvbmVzLg0KDQojIyMgVW4gcG9xdWl0byBkZSBoaXN0b3JpYQ0KDQpGdWUgZGVzYXJyb2xsYWRvIGluaWNpYWxtZW50ZSBwb3IgUm9iZXJ0IEdlbnRsZW1hbiB5IFJvc3MgSWhha2EgZGVsIERlcGFydGFtZW50byBkZSBFc3RhZMOtc3RpY2EgZGUgbGEgVW5pdmVyc2lkYWQgZGUgQXVja2xhbmQgZW4gMTk5My4gVmllbmUgZGUgbGEgY29tYmluYWNpw7NuIGRlIGRvcyBsZW5ndWFqZXMgUyB5IFNjaGVtZS4NCg0KDQojIyBJbnN0YWxhY2nDs24geSB1c28gZGUgUg0KDQotIFBhcmEgaW5zdGFsYXIgUiBkZXNjYXJnYXJsbyBkZWwgc2lndWllbnRlIGVuIGxhY2U6IDxodHRwczovL2NyYW4ucnN0dWRpby5jb20vPg0KDQotIFBhcmEgZGVzY2FyZ2FyIFIgc3R1ZGlvOiA8aHR0cHM6Ly93d3cucnN0dWRpby5jb20vcHJvZHVjdHMvcnN0dWRpby9kb3dubG9hZC8jZG93bmxvYWQ+DQoNCi0gUiBlbiBsYSBOdWJlOiBPdHJhIG9wY2nDs24gZXMgdXNhciBSIGVuIGxhIG51YmUgY29uIDxodHRwczovL3Bvc2l0LmNsb3VkLz4sIHBlcm8gbGEgdmVyc2nDs24gZ3JhdHVpdGEgZGEgdW4gdGllbXBvIGxpbWl0YWRvIGRlIHVzbyBhbCBtZXMuIA0KDQojIyBSIG1hcmtkb3duDQoNClIgbWFya2Rvd24gKGNvbW8gZXN0ZSBkb2N1bWVudG8gcXVlIGVzdGFtb3MgdXNhbmRvKSBub3MgcGVybWl0ZSBtZXpjbGFyIGNvbnRlbmlkbyBtdWx0aW1lZGlhICh0ZXh0bywgaW3DoWdlbmVzKSBjb24gY8OzZGlnbyBmdWVudGUgZWplY3V0YWJsZSwgY29tbyBsb3MganVweXRlciBub3RlYm9va3MuIEVzdG8gc2UgY29ub2NlIGNvbW8gbGl0ZXJhdGUgcHJvZ3JhbW1pbmcuDQoNCkVuIGVzdG9zIG5vdGVib29rcyBwb2RlbW9zIGNvbWJpbmFyIHRleHRvIGVuIGZvcm1hdG8gZGUgTWFya2Rvd24gY29uIGJsb3F1ZXMgZGUgY8OzZGlnbyBkZSBSIGNvbW8gZWwgcXVlIHRlbmVtb3MgYSBjb250aW51YWNpw7NuOg0KDQpgYGB7cn0NCiNzb3kgdW4gYmxvcXVlIGRlIGPDs2RpZ28NCnByaW50KCJIb2xhIE11bmRvIikNCmBgYA0KDQpMb3MgYmxvcXVlcyBkZSBjw7NkaWdvIGVzdMOhbiBkZW1hcmNhZG9zIHBvciB1biB7cn0gIHF1ZSBsbGV2YSBjb21pbGxhcyBhbnRlcyB5IGRlc3B1w6lzLiBQYXJhIGNyZWFyIHVubyBwb2RlbW9zIHNpbXBsZW1lbnRlIGVzY3JpYmlyIGxvcyBjYXLDoWN0ZXJlcyBuZWNlc2FyaW9zIG8gdXNhciBgQ3RybCtBbHQraWAuDQoNClBhcmEgZWplY3V0YXIgZWwgYmxvcXXDqSBkZSBjw7NkaWdvIHBvZGVtb3MgdXNhciBsb3MgYm90b25lcyBkZSBsYSBlc3F1aW5hIHN1cGVyaW9yIGRlcmFjaGEsIGBDdHJsK1NoaWZ0K0VudGVyYCBwYXJhIGNvcnJlciB0b2RvIGVsIGJsb3F1ZSBvIGBDdHJsK0VudGVyYCBwYXJhIGNvcnJlciBzb2xvIGxhIGzDrW5hIGFjdHVhbC4NCg0KIyMgT3BlcmFjaW9uZXMgDQoNCkVuIFIgcG9kZW1vcyBoYWNlciBvcGVyYWNpb25lcyBtYXRlbcOhdGljYXMgDQoNCmBgYHtyfQ0KMSs1DQoyKjMNCmxvZyg0KQ0KYGBgDQoNCg0KIyMgVmFyaWFiZWxzLCB2ZWN0b3JlcyB5IG1hdHJpY2VzDQoNClBhcmEgYXNpZ25hciB2YXJpYWJsZXMsIHBvZGVtb3MgdXNhciAiPC0iIG8gIj0iLiBFbiBSIHN0dWRpbyBjYWRhIHZleiBxdWUgYXNpZ25hbW9zIHVuYSB2YXJpYWJsZSBlc3RhIHNlIGFncmVnYSBhIGxhIHZlbnRhbmEgInZhbHVlcyIgZW4gbGEgZXNxdWluYSBzdXBlcmlvciBkZXJlY2hhLg0KDQpgYGB7cn0NCmEgPSA1DQpiIDwtIDMNCg0KYGBgDQoNClBvZGVtb3MgY3JlYXIgdmVjdG9yZXMgY29uICJjKCkiDQoNCmBgYHtyfQ0KYygxLDMsNCkNCg0KYygiZSIsImYiKQ0KDQpjKGE9MSxiPTIsYz0zKQ0KYGBgDQpgYGB7cn0NCmEgPC0gYyhhPTEsYj0yLGM9MykNCg0KYVsiYSJdDQpgYGANCmBgYHtyfQ0KDQpgYGANCg0KDQoNCiMjIERhdGFmcmFtZXMNCg0KDQojIyBMb29wcw0KDQoNCg0KIyMgSW5zdGFsYWNpw7NuIGRlIGxpYnJlcsOtYXMNCg0KIyMgRXhwb3J0YXIgZWwgZG9jdW1lbnRvDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRhbGxlciBSOiBTZXNpw7NuIDEiDQpvdXRwdXQ6DQogIGh0bWxfZG9jdW1lbnQ6DQogICAgbnVtYmVyX3NlY3Rpb25zOiB5ZXMNCiAgICB0aGVtZTogc3BhY2VsYWINCiAgICB0b2M6IHllcw0KICBwZGZfZG9jdW1lbnQ6DQogICAgdG9jOiB5ZXMNCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IHNlbnRlbmNlDQotLS0NCg0KRW4gZXN0ZSB0YWxsZXIgdmVyZW1vcyBxdcOpIGVzIFIsIGNvbW8gdXNhcmxvLCBtYW5lamFyIHkgdmlzdWFsaXphciBkYXRvcyBlbnRyZSBvdHJhcyBjb3Nhcy4NCg0KVG9kb3MgbG9zIHJlY3Vyc29zIHF1ZSB1c2FyZW1vcyBlbiBlbCB0YWxsZXIgZXN0YXLDoW4gZGlzcG9uaWJsZXMgZW4gZWwgc2lndWllbnRlIHJlcG9zaXRvcmlvIGVuIEdpdXRodWI6IDxodHRwczovL2dpdGh1Yi5jb20vbXphbWJyYW5vMS9UYWxsZXItUi0yMDIzL3RyZWUvbWFpbj4NCg0KDQojIEludHJvZHVjY2nDs24gYSBSDQoNCi0gUiBlcyB1biBlbnRvcm5vIHkgbGVuZ3VhamUgZGUgcHJvZ3JhbWFjacOzbiBjb24gdW4gZW5mb3F1ZSBhbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLiBFcyB1biBsZW5ndWFqZSBkZSBwcm9ncmFtYWNpw7NuIGNvbXBsZXRvLCBzZSBwdWVkZW4gY3JlYXIgdmFyaWFibGVzLCBsb29wcywgZnVuY2lvbmVzLCBldGMuDQoNCi0gUGVyaW10ZSBtYW5pcHVsYXIgZGF0b3MgZGUgbWFuZXJhIHNlbmNpbGxhIGUgZWZpY2llbnRlLg0KDQotIFByb3BvcmNpb25hIHVuYSBhbXBsaWEgdmFyaWVkYWQgZGUgbcOpdG9kb3MgcGFyYSBlbCBhbsOhbGlzaXMgZXN0YWTDrXN0aWNvLCBhbGdvcml0bW9zIGRlIGNsYXNpZmljaWFjacOzbiwgdmlzdWFsaXphY2lvbmVzLg0KDQojIyBVbiBwb3F1aXRvIGRlIGhpc3RvcmlhDQoNCkZ1ZSBkZXNhcnJvbGxhZG8gaW5pY2lhbG1lbnRlIHBvciBSb2JlcnQgR2VudGxlbWFuIHkgUm9zcyBJaGFrYSBkZWwgRGVwYXJ0YW1lbnRvIGRlIEVzdGFkw61zdGljYSBkZSBsYSBVbml2ZXJzaWRhZCBkZSBBdWNrbGFuZCBlbiAxOTkzLiBWaWVuZSBkZSBsYSBjb21iaW5hY2nDs24gZGUgZG9zIGxlbmd1YWplcyBTIHkgU2NoZW1lLg0KDQoNCiMgSW5zdGFsYWNpw7NuIHkgdXNvIGRlIFINCg0KLSBQYXJhIGluc3RhbGFyIFIgZGVzY2FyZ2FybG8gZGVsIHNpZ3VpZW50ZSBlbiBsYWNlOiA8aHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tLz4NCg0KLSBQYXJhIGRlc2NhcmdhciBSIHN0dWRpbzogPGh0dHBzOi8vd3d3LnJzdHVkaW8uY29tL3Byb2R1Y3RzL3JzdHVkaW8vZG93bmxvYWQvI2Rvd25sb2FkPg0KDQotIFIgZW4gbGEgTnViZTogT3RyYSBvcGNpw7NuIGVzIHVzYXIgUiBlbiBsYSBudWJlIGNvbiA8aHR0cHM6Ly9wb3NpdC5jbG91ZC8+LCBwZXJvIGxhIHZlcnNpw7NuIGdyYXR1aXRhIGRhIHVuIHRpZW1wbyBsaW1pdGFkbyBkZSB1c28gYWwgbWVzLiANCg0KIyBSIG1hcmtkb3duDQoNClIgbWFya2Rvd24gKGNvbW8gZXN0ZSBkb2N1bWVudG8gcXVlIGVzdGFtb3MgdXNhbmRvKSBub3MgcGVybWl0ZSBtZXpjbGFyIGNvbnRlbmlkbyBtdWx0aW1lZGlhICh0ZXh0bywgaW3DoWdlbmVzKSBjb24gY8OzZGlnbyBmdWVudGUgZWplY3V0YWJsZSwgY29tbyBsb3MganVweXRlciBub3RlYm9va3MuIEVzdG8gc2UgY29ub2NlIGNvbW8gbGl0ZXJhdGUgcHJvZ3JhbW1pbmcuDQoNCkVuIGVzdG9zIG5vdGVib29rcyBwb2RlbW9zIGNvbWJpbmFyIHRleHRvIGVuIGZvcm1hdG8gZGUgTWFya2Rvd24gY29uIGJsb3F1ZXMgZGUgY8OzZGlnbyBkZSBSIGNvbW8gZWwgcXVlIHRlbmVtb3MgYSBjb250aW51YWNpw7NuOg0KDQpgYGB7cn0NCiNzb3kgdW4gYmxvcXVlIGRlIGPDs2RpZ28NCnByaW50KCJIb2xhIE11bmRvIikNCmBgYA0KDQpMb3MgYmxvcXVlcyBkZSBjw7NkaWdvIGVzdMOhbiBkZW1hcmNhZG9zIHBvciB1biB7cn0gIHF1ZSBsbGV2YSBjb21pbGxhcyBhbnRlcyB5IGRlc3B1w6lzLiBQYXJhIGNyZWFyIHVubyBwb2RlbW9zIHNpbXBsZW1lbnRlIGVzY3JpYmlyIGxvcyBjYXLDoWN0ZXJlcyBuZWNlc2FyaW9zIG8gdXNhciBgQ3RybCtBbHQraWAuDQoNClBhcmEgZWplY3V0YXIgZWwgYmxvcXXDqSBkZSBjw7NkaWdvIHBvZGVtb3MgdXNhciBsb3MgYm90b25lcyBkZSBsYSBlc3F1aW5hIHN1cGVyaW9yIGRlcmFjaGEsIGBDdHJsK1NoaWZ0K0VudGVyYCBwYXJhIGNvcnJlciB0b2RvIGVsIGJsb3F1ZSBvIGBDdHJsK0VudGVyYCBwYXJhIGNvcnJlciBzb2xvIGxhIGzDrW5hIGFjdHVhbC4NCg0KDQoNCiMgSW5zdGFsYWNpw7NuIGRlIGxpYnJlcsOtYXMNCg0KUGFyYSBpbnN0YWxhciBsaWJyZXLDrWFzIHVzYW1vcyBlbCBjb21hbmRvIGluc3RhbGwucGFja2FnZXMoJ25vbWJyZSBsaWJyZXLDrWEnKS4gUG9yIGVqZW1wbG86DQoNCmBgYHtyLCBldmFsPUYsIG1lc3NhZ2U9Rn0NCmluc3RhbGwucGFja2FnZXMoImdncGxvdDIiKQ0KYGBgDQpSZWNvbWVuZGFjacOzbjogaW5zdGFsYXIgUiB0b29scyA8aHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvYmluL3dpbmRvd3MvUnRvb2xzL3J0b29sczQyL3J0b29scy5odG1sPg0KDQpBIHZlY2VzIGNhdXNhbiBlcnJvcmVzIHJhcm9zLCBsYSBtZWpvciByZWNvbWVuZGFjacOzbjogQnVzY2FyIGVuIGdvb2dsZS4NCg0KIyBFeHBvcnRhciBlbCBkb2N1bWVudG8NCg0KUGFyYSBleHBvcnRhciBlc3RlIGRvY3VtZW50byBhIG90cm9zIGZvcm1hdG9zOiBmaWxlIC0+IEtuaXQgRG9jdW1lbnQsIG8gdGFtYmnDqW4gJ0N0cmwrU2hpZnQrSycuIEVzdG8gZ2VuZXJhcsOhIHVuYSB2ZXJzacOzbiBIVE1MIGRlbCBub3RlYm9vay4NCg0KDQojIE9wZXJhY2lvbmVzIA0KDQpFbiBSIHBvZGVtb3MgaGFjZXIgb3BlcmFjaW9uZXMgbWF0ZW3DoXRpY2FzIA0KDQpgYGB7cn0NCjErNQ0KMiozDQpsb2coNCkNCmBgYA0KDQoNCiMgVmFyaWFibGVzIHkgdmVjdG9yZXMNCg0KUGFyYSBhc2lnbmFyIHZhcmlhYmxlcywgcG9kZW1vcyB1c2FyICI8LSIgbyAiPSIuIEVuIFIgc3R1ZGlvIGNhZGEgdmV6IHF1ZSBhc2lnbmFtb3MgdW5hIHZhcmlhYmxlIGVzdGEgc2UgYWdyZWdhIGEgbGEgdmVudGFuYSAidmFsdWVzIiBlbiBsYSBlc3F1aW5hIHN1cGVyaW9yIGRlcmVjaGEuDQoNCmBgYHtyfQ0KYSA9IDUNCmIgPC0gMw0KDQpgYGANCg0KUG9kZW1vcyBjcmVhciB2ZWN0b3JlcyBjb24gImMoKSINCg0KYGBge3J9DQpjKDEsMyw0KQ0KDQpjKCJlIiwiZiIpDQoNCmMoYT0xLGI9MixjPTMpDQpgYGANClBvZGVtb3MgYWNjZWRlciBhIGxvcyB2YWxvcmVzIGNvbiBzdSDDrW5kaWNlLiAqKkltcG9ydGFudGU6IEVuIFIgbG9zIMOtbmRpY2VzIGVtcGllemFuIGVuIDEqKg0KDQpgYGB7cn0NCmEgPC0gYygxLDMsNCkNCg0KYVsxXQ0KDQpgYGANClRhbWJpw6luIGxlIHBvZGVtb3MgYXNpZ25hciBub21icmVzIGEgbG9zIHZhbG9yZXMgZGVsIHZlY3Rvci4NCg0KYGBge3J9DQphIDwtIGMoYT0xLGI9MixjPTMpDQoNCmFbImEiXQ0KYGBgDQoNCg0KDQpgYGB7cn0NCg0KYSA8LSBjKDEsMiwzKQ0KDQpiIDwtIGMoYSw0LDUsNikNCg0KYGBgDQoNCnkgcG9kZW1vcyBoYWNlciBvcGVyYWNpb25lcyBjb24gZWxsb3MuDQoNCmBgYHtyfQ0KbWVhbihiKQ0KbGVuZ3RoKGIpDQpzdW0oYikNCmIqMw0KYisxDQpgYGANCg0KDQpBbGd1bmFzIGZvcm1hcyBkZSBjcmVhciB2ZWN0b3Jlcw0KDQpgYGB7cn0NCiNWZWN0b3IgY29uIHZhbG9yZXMgZGVsIDEgYWwgMTANCnNlcSgxLCAxMCkNCg0KI1ZlY3RvciBxdWUgdmEgZGUgMSBhIDksIGNhZGEgMg0Kc2VxKDEsIDEwLCAyKQ0KDQojUmVwZXRpciB1biB2YWxvciBjaWVydGEgY2FudGlkYWQgZGUgdmVjZXMNCnJlcCg4LDMpDQoNCmBgYA0KDQpDb21wYXJhciB2YWxvcmVzDQoNCmBgYHtyfQ0KciA8LSBjKDEsMiwzLDQsNSw2KQ0KciA8IDQNCmBgYA0KVGFtYmnDqW4gcG9kZW1vcyBnZW5lcmFyIHZlY3RvcmVzIGFsZWF0b3Jpb3MgY29uIG51ZXN0cmEgZGlzdHJpYnVjacOzbiBkZSBwcm9iYWJpbGlkYWQgZmF2b3JpdGE6DQoNCmBgYHtyfQ0Kcm5vcm0oNSkNCg0KcnBvaXMoMTAsMikNCmBgYA0KDQoNCiMgTG9vcHMNCg0KQ29tbyBjdWFscXVpZXIgbGVuZ3VhamUgZGUgcHJvZ3JhbWFjacOzbiBxdWUgc2UgcmVzcGV0ZSwgZW4gUiBwb2RlbW9zIGhhY2VyIGNpY2xvcyBmb3IgeSBXaGlsZS4NCg0KYGBge3J9DQpmb3IgKGkgaW4gMToxMCkgew0KICBwcmludCAoaSkNCn0NCmBgYA0KDQoNCmBgYHtyfQ0KZm9yIChpIGluIGMoMSwyLDMsNCw1KSkgew0KcHJpbnQoaSkNCn0NCmBgYA0KDQpgYGB7cn0NCmkgPC0gMA0Kd2hpbGUgKCBpIDwgMTApIHsNCiAgICBpIDwtIGkrMQ0KICAgIHByaW50KGkpDQp9DQpgYGANCmBgYHtyfQ0KaSA8LSAwDQp3aGlsZSAoVFJVRSkgew0KICBpZiAoaSA9PSAxMCkgDQogICAgYnJlYWsNCiAgZWxzZSB7DQogICAgaSA8LSBpKzENCiAgICBwcmludChpKQ0KICB9ICAgIA0KfQ0KYGBgDQoNCg0KIyBEYXRhZnJhbWVzDQoNCkNvbW8gZG9uZGUgbcOhcyBzZSB1c2EgUiBlcyBwYXJhIGVuIGFuw6FsaXNpcyBkZSBlc3RhZMOtc3RpY28sIG1pbmVyw61hIGRlIGRhdG9zLCBldGMuIGVzIGltcG9ydGFudGUgc2FiZXIgbWFuZWphciBkYXRvcy4gDQoNClBhcmEgZXN0byBsYSBlc3RydWN0dXJhIGVzdHJlbGxhIHNvbiBsb3MgZGF0YSBmcmFtZXMuIEVzdG9zIHNvbiBlc3RydWN0dXJhcyBkZSBkYXRvcyBkZSBkb3MgZGltZW5zaW9uZXMgKHVuYSB0YWJsYSkgcXVlIG5vcyBzaXJ2ZW4gcGFyYSBndWFyZGFyIGRhdG9zLCBsb3MgcXVlIHB1ZWRlbiBzZXIgZGUgZGlzdGludG8gdGlwby4NCg0KYGBge3J9DQphbHVtbm9zIDwtIGRhdGEuZnJhbWUobm9tYnJlID0gYygiUGVwaXRvIiwgIlBlcGl0YSIsICJKdWFuIiksIGVkYWQgPSBjKDIwLCAyMiwgMTgpLCBjdXJzb3M9IHJlcCg2LDMpKQ0KDQojIE11ZXN0cmEgdG9kbyBlbCBkYXRhIGZyYW1lDQphbHVtbm9zDQpgYGANCg0KDQpQb2RlbW9zIHNlbGVjY2lvbmFyIHVuYSBjb2x1bW5hOg0KDQpgYGB7cn0NCmFsdW1ub3Mkbm9tYnJlDQphbHVtbm9zWydlZGFkJ10NCmBgYA0KDQpgYGB7cn0NCm5jb2woYWx1bW5vcykNCm5yb3coYWx1bW5vcykNCmBgYA0KDQoNCmBgYHtyfQ0KZGltKGFsdW1ub3MpDQpgYGANCg0KDQoNCg0KDQo=</div>
 
 
 
