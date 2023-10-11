@@ -390,7 +390,8 @@ Exportar el documento</a></li>
 <li><a href="#operaciones" id="toc-operaciones"><span class="toc-section-number">6</span> Operaciones</a></li>
 <li><a href="#variables-y-vectores" id="toc-variables-y-vectores"><span class="toc-section-number">7</span> Variables y vectores</a></li>
 <li><a href="#loops" id="toc-loops"><span class="toc-section-number">8</span> Loops</a></li>
-<li><a href="#dataframes" id="toc-dataframes"><span class="toc-section-number">9</span> Dataframes</a></li>
+<li><a href="#strings" id="toc-strings"><span class="toc-section-number">9</span> Strings</a></li>
+<li><a href="#dataframes" id="toc-dataframes"><span class="toc-section-number">10</span> Dataframes</a></li>
 </ul>
 </div>
 
@@ -530,9 +531,9 @@ r &lt; 4</code></pre>
 <p>También podemos generar vectores aleatorios con nuestra distribución
 de probabilidad favorita:</p>
 <pre class="r"><code>rnorm(5)</code></pre>
-<pre><code>## [1]  0.98622076  0.01788614 -0.20617337 -1.41539043  0.61337482</code></pre>
+<pre><code>## [1]  0.2670652 -0.2373295  1.3155887 -0.7906429  0.9114897</code></pre>
 <pre class="r"><code>rpois(10,2)</code></pre>
-<pre><code>##  [1] 0 4 2 1 1 2 0 1 3 2</code></pre>
+<pre><code>##  [1] 1 2 1 1 2 1 3 2 3 1</code></pre>
 </div>
 <div id="loops" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Loops</h1>
@@ -594,8 +595,26 @@ while (TRUE) {
 ## [1] 9
 ## [1] 10</code></pre>
 </div>
-<div id="dataframes" class="section level1" number="9">
-<h1><span class="header-section-number">9</span> Dataframes</h1>
+<div id="strings" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Strings</h1>
+<p>Podemos crear variables que contengan texto:</p>
+<pre class="r"><code>hola &lt;- &quot;hola mundo&quot;
+
+cat(hola)</code></pre>
+<pre><code>## hola mundo</code></pre>
+<pre class="r"><code>paste(&quot;hola&quot;,&quot;chao&quot;,sep = &quot;*&quot;)</code></pre>
+<pre><code>## [1] &quot;hola*chao&quot;</code></pre>
+<pre class="r"><code>paste(&quot;hola&quot;,1:4,sep = &quot;*&quot;)</code></pre>
+<pre><code>## [1] &quot;hola*1&quot; &quot;hola*2&quot; &quot;hola*3&quot; &quot;hola*4&quot;</code></pre>
+<pre class="r"><code>substr(hola,2,3)</code></pre>
+<pre><code>## [1] &quot;ol&quot;</code></pre>
+<p>Hay un vector que contiene todo el abecedario:</p>
+<pre class="r"><code>letters</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
+## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+</div>
+<div id="dataframes" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Dataframes</h1>
 <p>Como donde más se usa R es para en análisis de estadístico, minería
 de datos, etc. es importante saber manejar datos.</p>
 <p>Para esto la estructura estrella son los data frames. Estos son
@@ -623,6 +642,85 @@ alumnos</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="r"><code>dim(alumnos)</code></pre>
 <pre><code>## [1] 3 3</code></pre>
+<pre class="r"><code>alumnos2 &lt;- data.frame(nombre = c(&quot;Juanita&quot;, &quot;Pedro&quot;), edad = c(26, 24), cursos= rep(6,2))</code></pre>
+<pre class="r"><code>alumnos &lt;- rbind(alumnos,alumnos2)
+alumnos</code></pre>
+<pre><code>##    nombre edad cursos
+## 1  Pepito   20      6
+## 2  Pepita   22      6
+## 3    Juan   18      6
+## 4 Juanita   26      6
+## 5   Pedro   24      6</code></pre>
+<p>Podemos sacar una fila del dataset</p>
+<pre class="r"><code>alumnos[2,]</code></pre>
+<pre><code>##   nombre edad cursos
+## 2 Pepita   22      6</code></pre>
+<p>o una columna también de esta forma:</p>
+<pre class="r"><code>alumnos[,1]</code></pre>
+<pre><code>## [1] &quot;Pepito&quot;  &quot;Pepita&quot;  &quot;Juan&quot;    &quot;Juanita&quot; &quot;Pedro&quot;</code></pre>
+<p>R trae algunos dataset incorporados:</p>
+<pre class="r"><code>library(datasets)
+data(iris)</code></pre>
+<pre class="r"><code>iris</code></pre>
+<p>Podemos cargar nuestros propoios datasets:</p>
+<pre class="r"><code>diabetes &lt;- read.csv(&quot;./Datasets/diabetes_prediction_dataset.csv&quot;)</code></pre>
+<pre class="r"><code>diabetes &lt;- read.csv(&quot;https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/diabetes_prediction_dataset.csv&quot;)</code></pre>
+<p>Y ver una muestra de ellos:</p>
+<pre class="r"><code>head(diabetes)</code></pre>
+<pre><code>##   gender age hypertension heart_disease smoking_history   bmi HbA1c_level
+## 1 Female  80            0             1           never 25.19         6.6
+## 2 Female  54            0             0         No Info 27.32         6.6
+## 3   Male  28            0             0           never 27.32         5.7
+## 4 Female  36            0             0         current 23.45         5.0
+## 5   Male  76            1             1         current 20.14         4.8
+## 6 Female  20            0             0           never 27.32         6.6
+##   blood_glucose_level diabetes
+## 1                 140        0
+## 2                  80        0
+## 3                 158        0
+## 4                 155        0
+## 5                 155        0
+## 6                  85        0</code></pre>
+<pre class="r"><code>diabetes$age</code></pre>
+<pre class="r"><code>mean(diabetes$age)</code></pre>
+<pre><code>## [1] 41.88586</code></pre>
+<pre class="r"><code>median(diabetes$age)</code></pre>
+<pre><code>## [1] 43</code></pre>
+<pre class="r"><code>sum(diabetes$age)</code></pre>
+<pre><code>## [1] 4188586</code></pre>
+<pre class="r"><code>sd(diabetes$age)</code></pre>
+<pre><code>## [1] 22.51684</code></pre>
+<pre class="r"><code>min(diabetes$age)</code></pre>
+<pre><code>## [1] 0.08</code></pre>
+<pre class="r"><code>quantile(diabetes$age) </code></pre>
+<pre><code>##    0%   25%   50%   75%  100% 
+##  0.08 24.00 43.00 60.00 80.00</code></pre>
+<pre class="r"><code>summary(diabetes)</code></pre>
+<pre><code>##     gender               age         hypertension     heart_disease    
+##  Length:100000      Min.   : 0.08   Min.   :0.00000   Min.   :0.00000  
+##  Class :character   1st Qu.:24.00   1st Qu.:0.00000   1st Qu.:0.00000  
+##  Mode  :character   Median :43.00   Median :0.00000   Median :0.00000  
+##                     Mean   :41.89   Mean   :0.07485   Mean   :0.03942  
+##                     3rd Qu.:60.00   3rd Qu.:0.00000   3rd Qu.:0.00000  
+##                     Max.   :80.00   Max.   :1.00000   Max.   :1.00000  
+##  smoking_history         bmi         HbA1c_level    blood_glucose_level
+##  Length:100000      Min.   :10.01   Min.   :3.500   Min.   : 80.0      
+##  Class :character   1st Qu.:23.63   1st Qu.:4.800   1st Qu.:100.0      
+##  Mode  :character   Median :27.32   Median :5.800   Median :140.0      
+##                     Mean   :27.32   Mean   :5.528   Mean   :138.1      
+##                     3rd Qu.:29.58   3rd Qu.:6.200   3rd Qu.:159.0      
+##                     Max.   :95.69   Max.   :9.000   Max.   :300.0      
+##     diabetes    
+##  Min.   :0.000  
+##  1st Qu.:0.000  
+##  Median :0.000  
+##  Mean   :0.085  
+##  3rd Qu.:0.000  
+##  Max.   :1.000</code></pre>
+<p>Podemos filtrar los datos que nosotros queramos del dataset:</p>
+<pre class="r"><code>diabetes[diabetes$bmi &gt; 27,]</code></pre>
+<p>yo podemos hacer filtro un poco más complicados:</p>
+<pre class="r"><code>diabetes[diabetes$bmi &gt; 27 &amp; diabetes$age&lt;40,]</code></pre>
 </div>
 
 

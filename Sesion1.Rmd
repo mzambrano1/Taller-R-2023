@@ -203,6 +203,32 @@ while (TRUE) {
 }
 ```
 
+# Strings
+
+Podemos crear variables que contengan texto:
+
+```{r}
+hola <- "hola mundo"
+
+cat(hola)
+```
+
+```{r}
+paste("hola","chao",sep = "*")
+```
+
+```{r}
+paste("hola",1:4,sep = "*")
+```
+```{r}
+substr(hola,2,3)
+```
+Hay un vector que contiene todo el abecedario:
+
+```{r}
+letters
+```
+
 
 # Dataframes
 
@@ -243,6 +269,16 @@ alumnos2 <- data.frame(nombre = c("Juanita", "Pedro"), edad = c(26, 24), cursos=
 alumnos <- rbind(alumnos,alumnos2)
 alumnos
 ```
+Podemos sacar una fila del dataset
+
+```{r}
+alumnos[2,]
+```
+o una columna también de esta forma:
+
+```{r}
+alumnos[,1]
+```
 
 
 R trae algunos dataset incorporados:
@@ -253,10 +289,11 @@ data(iris)
 ```
 
 
-```{r}
+```{r,eval=FALSE}
 iris
 ```
 
+Podemos cargar nuestros propoios datasets:
 
 ```{r}
 diabetes <- read.csv("./Datasets/diabetes_prediction_dataset.csv")
@@ -267,5 +304,51 @@ diabetes <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023
 ```
 
 
+Y ver una muestra de ellos:
 
+```{r}
+head(diabetes)
+```
+
+
+```{r, eval=FALSE}
+diabetes$age
+```
+
+
+
+```{r}
+mean(diabetes$age)
+
+median(diabetes$age)
+
+sum(diabetes$age)
+
+sd(diabetes$age)
+
+min(diabetes$age)
+
+```
+```{r}
+quantile(diabetes$age) 
+```
+
+
+```{r}
+summary(diabetes)
+```
+
+
+Podemos filtrar los datos que nosotros queramos del dataset:
+
+```{r, eval=FALSE}
+diabetes[diabetes$bmi > 27,]
+
+```
+
+yo podemos hacer filtro un poco más complicados:
+
+```{r, eval=FALSE}
+diabetes[diabetes$bmi > 27 & diabetes$age<40,]
+```
 
