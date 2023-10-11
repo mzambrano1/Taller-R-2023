@@ -235,6 +235,36 @@ nrow(alumnos)
 dim(alumnos)
 ```
 
+```{r}
+alumnos2 <- data.frame(nombre = c("Juanita", "Pedro"), edad = c(26, 24), cursos= rep(6,2))
+```
+
+```{r}
+alumnos <- rbind(alumnos,alumnos2)
+alumnos
+```
+
+
+R trae algunos dataset incorporados:
+
+```{r}
+library(datasets)
+data(iris)
+```
+
+
+```{r}
+iris
+```
+
+
+```{r}
+diabetes <- read.csv("./Datasets/diabetes_prediction_dataset.csv")
+```
+
+```{r}
+diabetes <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/diabetes_prediction_dataset.csv")
+```
 
 
 
