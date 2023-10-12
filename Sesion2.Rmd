@@ -1,0 +1,72 @@
+---
+title: "Taller R: Sesion 2"
+author: "Maria Jose Zambrano"
+date: "2023-10-11"
+output: html_document
+---
+
+# Analisis exploratorio (EDA)
+
+Realizar exploraciones iniciales con los datos, para ver que datos tenemos, como son, si hay nulos, si es necesario limpiarlos etc.
+Para ver todo esto vamos a usar un dataset con datos de airbnb de nueva york.
+
+```{r}
+df <- read.csv("./Datasets/AB_NYC_2019.csv")
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+dim(df)
+```
+
+```{r}
+str(df)
+```
+
+```{r}
+summary(df)
+```
+
+```{r}
+any(is.na(df))
+```
+
+
+```{r}
+null_count <- colSums(is.na(df))
+print(null_count)
+```
+
+```{r}
+numeric_dataset <- df[sapply(df, is.numeric)]
+cor(numeric_dataset)
+```
+
+
+
+## Visualizaciones básicas
+
+Una herramiento muy útil para explorar datos son las visualizaciones. Aquí veremos como hacer algunas visualizaciones básicas para explorar nuestros datos. 
+Para esto usaremos herramientas nativas de R y la librería ggplot.
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+
+```
+
+
+
+# Limpieza de datos
+
+
+# Operaciones con Dataframes
+
+
+
+
