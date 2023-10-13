@@ -5,44 +5,81 @@ date: "2023-10-11"
 output: html_document
 ---
 
+En este sesión veremos algunas cosas utiles a la hora de trabajar con datos, exploración, limpieza y manjeo de dataframes.
+
+
+# Ayuda
+
+Pero antes de partir algo que puede ser util, a veces uno quiere saber como funciona una funcion, que argumentos tiene etc. Para esto y no entrar en panico podemos pedirle ayuda a R:
+
+```{r}
+help("read.csv")
+```
+
+Le pasamos la funcion que queremos a help y nos va a mostrar la documentaion.
+
 # Analisis exploratorio (EDA)
+
+Ahora si a los datitos.
 
 Realizar exploraciones iniciales con los datos, para ver que datos tenemos, como son, si hay nulos, si es necesario limpiarlos etc.
 Para ver todo esto vamos a usar un dataset con datos de airbnb de nueva york.
 
 ```{r}
-df <- read.csv("./Datasets/AB_NYC_2019.csv")
+df <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/AB_NYC_2019.csv")
 ```
+
+Ver como es el dataset con head:
 
 ```{r}
 head(df)
 ```
 
+Explorar cuantas dimensiones tiene:
+
 ```{r}
 dim(df)
 ```
+
+Con str podemos ver las columnas del dataframe con su tipo:
 
 ```{r}
 str(df)
 ```
 
+Y ver un resumen estadístico con summary:
+
 ```{r}
 summary(df)
 ```
+Table nos permite realizar un conteo de cada clase cuando le pasamos una columna:
+
 ```{r}
 table(df$neighbourhood_group)
 ```
+
+También le podemos pasar más de una para que nos haga un conteo de las combinaciones:
+
+```{r}
+table(df$neighbourhood_group,df$neighbourhood)
+```
+
+
+Algo importante siempre, ver si nuestro dataset tiene datos nulos:
 
 
 ```{r}
 any(is.na(df))
 ```
 
+Y los podemos contar por columna para tener todo bien claro:
 
 ```{r}
 null_count <- colSums(is.na(df))
 print(null_count)
 ```
+
+También podemos ver las correlaciones entre las distintas variables numericas con cor. Esto es muy util cuando queremos aplicar algoritmos de clasificacion o regresion, tambien para ver si podemos eliminar alguna columna que no aporte mucha informacion.
 
 ```{r}
 numeric_dataset <- df[sapply(df, is.numeric)]
@@ -70,7 +107,7 @@ library(ggplot2)
 library(GGally)
 library(corrplot)
 ```
-
+La matriz de correlacion que encontramos antes la podemos graficar:
 
 ```{r}
 corr <- round(cor(numeric_dataset), 1)
@@ -80,46 +117,100 @@ corrplot(
 ```
 
 ```{r}
-boxplot(numeric_dataset)
+corrplot(corr, method="pie")
 ```
 
 
 ```{r}
-boxplot(numeric_dataset[,5:10])
+corrplot(corr, method="color")
 ```
+
+```{r}
+corrplot(corr, type="lower")
+```
+
+Podemos hacer boxplots para ver como están distribuidos nuestros datos:
+
+```{r}
+boxplot(numeric_dataset)
+```
+
+Dejemos algunas columnas:
 
 ```{r}
 boxplot(numeric_dataset[,6:10])
 ```
 
+```{r}
+boxplot(df$price,main="Boxplot de los precios",
+        xlab="x",
+        ylab="y",
+        sub="un subtitulo",
+        col.main="red", col.lab="blue", col.sub="black")
+```
+
+Parecido a los boxplots podemos hacer histogramas de las columnas que queramos:
 
 ```{r}
-hist(df$availability_365)
+hist(df$availability_365,main="Histograma")
+```
+
+```{r}
+plot(density(df$availability_365))
 ```
 
 
+Ahora veamos como hacer un grafico de barras, pero usando ggplot. Esta libreria permite hacer gráficos más elaborados. La idea principal detrás de ggplot es el uso de la “Gramática de Gráficos”, que nos ayuda a generar gráficos con una sintaxis más cómoda, que separa los componentes de un gráfico en distintas “capas”.
+
+Para esto usaremos un subconjunto de los datos
+
 ```{r}
-ggplot(data = df) +
-  geom_histogram(mapping = aes(x = price), binwidth = 0.5)
+manhattan = df[df$neighbourhood_group =="Manhattan",]
+
+ggplot(manhattan) +   # asociamos un data frame a ggplot
+  geom_bar(aes(x = neighbourhood, y = reviews_per_month), stat="identity") +   # creamos un gráfico de barras como una capa
+  coord_flip() +  # transformamos el gráfico invirtiendo los ejes de coordenadas (sólo visualmente)
+  ggtitle("Reviews al mes") + # título
+  xlab("Vecindario") + ylab("Reviews")  # etiquetas
+
 ```
+
+
+Tambien podemos contar la cantidad de datos de cada vecindario
+
 ```{r}
-ggplot(df, aes(x=neighbourhood_group )) +
-  geom_bar()
+ggplot(df) +
+ geom_bar(aes(x=neighbourhood_group)) +
+  ggtitle("Datos por vecindario")
+
 ```
 
 
-
+Algo tambien muy util es ver relaciones entre dos variable con un scatter plot:
 
 ```{r}
 ggplot(data = df) +
   geom_point(mapping = aes(x = minimum_nights, y = price))
 ```
+
+Tambien lo podemos hacer sin ggplot, con solo r:
+
+```{r}
+plot(df$minimum_nights,df$price)
+```
+
+Otro ejempor:
+
 ```{r}
 
 ggplot(data = df) +
   geom_point(mapping = aes(x = longitude, y = price))
 
 ```
+
+
+Con pairs podemos hacer una matriz con los scatterplts de las variables:
+
 ```{r}
 pairs(numeric_dataset)
 ```
@@ -168,18 +259,30 @@ dim(df)
 # Operaciones con Dataframes
 
 
+Algo importante tambien es manejar los dataframes.
+
+Con aggregate podemos calcular resúmenes estadísticos para subconjuntos de datos. Esta funcion aplica una funcion a ciertas columnas.
+
+
+Aqui calcularemos el precio promedio por vecindario agrupado:
+
 ```{r}
 aggregate(price ~ neighbourhood_group, df, FUN=mean)
 ```
 
+Tambien podemos hilar mas fino y hacerlo por vecindario agrupado y vecindario:
 
 ```{r}
 aggregate(price ~ neighbourhood_group + neighbourhood, df, FUN=mean)
 ```
 
+Cuando queremos ver los valore unicos de una columna usamos unique:
+
 ```{r}
 unique(df$neighbourhood_group)
 ```
+
+Y tambien podemos ordenar los datos ascendentemente:
 
 ```{r}
 #Para hacer el ejemplo pequeño, vamos a tomar los 10 primeros datos 
@@ -189,14 +292,22 @@ df_reducido <- df[1:10,]
 # Ordenar ascendentemente la columna Cantidad
 df_reducido[order(df_reducido$price), ]
 ```
+
+y descendentemente:
+
 ```{r}
 # Ordenar descendente 
 df_reducido[order(df_reducido$price, decreasing = TRUE), ]
 ```
 
+Otra forma de lo mismo:
+
 ```{r}
 df_reducido[order(-df_reducido$price), ]
 ```
+
+
+
 
 
 
