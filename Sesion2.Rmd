@@ -29,6 +29,10 @@ str(df)
 ```{r}
 summary(df)
 ```
+```{r}
+table(df$neighbourhood_group)
+```
+
 
 ```{r}
 any(is.na(df))
@@ -52,20 +56,150 @@ cor(numeric_dataset)
 Una herramiento muy útil para explorar datos son las visualizaciones. Aquí veremos como hacer algunas visualizaciones básicas para explorar nuestros datos. 
 Para esto usaremos herramientas nativas de R y la librería ggplot.
 
+para instalar librerías necesarias:
+
+```{r, eval=FALSE}
+install.packages("GGally")
+install.packages("ggplot2")
+install.packages("corrplot")
+```
+
+Cargar librerías:
 ```{r}
 library(ggplot2)
+library(GGally)
+library(corrplot)
+```
+
+
+```{r}
+corr <- round(cor(numeric_dataset), 1)
+corrplot(
+  corr
+)
 ```
 
 ```{r}
-
+boxplot(numeric_dataset)
 ```
 
+
+```{r}
+boxplot(numeric_dataset[,5:10])
+```
+
+```{r}
+boxplot(numeric_dataset[,6:10])
+```
+
+
+```{r}
+hist(df$availability_365)
+```
+
+
+```{r}
+ggplot(data = df) +
+  geom_histogram(mapping = aes(x = price), binwidth = 0.5)
+```
+```{r}
+ggplot(df, aes(x=neighbourhood_group )) +
+  geom_bar()
+```
+
+
+
+
+```{r}
+ggplot(data = df) +
+  geom_point(mapping = aes(x = minimum_nights, y = price))
+```
+```{r}
+
+ggplot(data = df) +
+  geom_point(mapping = aes(x = longitude, y = price))
+
+```
+```{r}
+pairs(numeric_dataset)
+```
 
 
 # Limpieza de datos
 
+Ahora que sabemos más o menos con que estamos trabajando hay que pasar a limpiar los datos.
+Empecemos con con borrar los datos nulos:
+
+```{r}
+df = na.omit(df)
+```
+
+Saquemos outliers:
+
+```{r}
+# definimos nuestros limites de valores a considerar
+quartiles <- quantile(df$price, probs=c(.25, .75), na.rm = FALSE)
+IQR <- IQR(df$price)
+ 
+Lower <- quartiles[1] - 1.5*IQR
+Upper <- quartiles[2] + 1.5*IQR
+
+df <- df[df$price > Lower & df$price < Upper,]
+
+
+```
+
+
+Y saquemos una columna que no nos aporta mucho:
+
+```{r}
+df <- df[, -which(names(df) == "host_name")]
+```
+
+
+Veamos con cuantos datos quedamos:
+
+```{r}
+dim(df)
+```
+
+
 
 # Operaciones con Dataframes
+
+
+```{r}
+aggregate(price ~ neighbourhood_group, df, FUN=mean)
+```
+
+
+```{r}
+aggregate(price ~ neighbourhood_group + neighbourhood, df, FUN=mean)
+```
+
+```{r}
+unique(df$neighbourhood_group)
+```
+
+```{r}
+#Para hacer el ejemplo pequeño, vamos a tomar los 10 primeros datos 
+
+df_reducido <- df[1:10,]
+
+# Ordenar ascendentemente la columna Cantidad
+df_reducido[order(df_reducido$price), ]
+```
+```{r}
+# Ordenar descendente 
+df_reducido[order(df_reducido$price, decreasing = TRUE), ]
+```
+
+```{r}
+df_reducido[order(-df_reducido$price), ]
+```
+
+
+
 
 
 
