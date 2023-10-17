@@ -125,13 +125,203 @@ Podemos sumar días!
 today() + 5
 ```
 ## Merge
-Como los join en SQL, en R podemos juntar dos dataframes según alguna columna en comun, con merge
+Como los join en SQL, en R podemos juntar dos dataframes según alguna columna en comun, con merge.
+
+```{r}
+id_nombre <- data.frame(id = 0:7, nombre = c("Juan Pérez", "Ana Rodríguez", "Carlos García", "María López", "Luis Martínez", "Laura Sánchez", "Javier González", "Andrea Torres"))
+
+id_horas <- data.frame(id = 1:6, horas = c(0,3,5,7,9,11))
+
+id_nombre
+id_horas
+```
+
+```{r}
+merge(id_nombre, id_horas)
+```
+```{r}
+merge(id_nombre, id_horas,all = TRUE)
+```
+
+
+```{r}
+merge(id_nombre, id_horas,all.x = TRUE)
+```
+
+```{r}
+merge(id_nombre, id_horas,all.y = TRUE)
+```
+
+
+```{r}
+id_nombre <- data.frame(id = 0:7, nombre = c("Juan Pérez", "Ana Rodríguez", "Carlos García", "María López", "Luis Martínez", "Laura Sánchez", "Javier González", "Andrea Torres"))
+
+id_horas <- data.frame(identificador = 1:6, horas = c(0,3,5,7,9,11))
+
+merge(id_nombre, id_horas, by.x = "id", by.y = "identificador")
+```
+
 
 ## Alicar funciones a dataframes
+
+Como ya vimos como hacer funciones en R, ahora vamos a ver como le podemos aplicar funciones a los dataframes. Para esto existe la funcion `sapply`.
+
+```{r}
+por10 <- function(x){
+  return(x*10)
+}
+
+sapply(id_nombre$id,por10)
+```
+```{r}
+m <- c(1,9,6,5,9,6) 
+  
+n <- c(8,2,3,6,4,3) 
+  
+o <- c(21,0,14,5,3,2) 
+  
+p <- c(4,6,3,7,1,3) 
+  
+
+df <- data.frame(A=m,B=n,C=o,D=p) 
+
+sapply(df,por10)
+  
+```
+
+```{r}
+sapply(df, function(x) sum(is.na(x)))
+```
 
 
 ## Tidyverse
 
+Tidyverse es una colección de paquetes disponibles en R y orientados a la manipulación, importación, exploración y visualización de datos. Entre las librerias que incluye estan `ggplot` y `dyplr` que nos poemite manipular datos.
+
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+df <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/AB_NYC_2019.csv")
+```
+
+Podemos extraer informacion del dataset:
+
+```{r}
+glimpse(df)
+```
+
+Seleccionar una columna:
+
+```{r}
+df %>%
+  select(name) %>%
+  head()
+```
+`%>%` Nos permite encadenar instrucciones. `dyplr` tiene funciones para seleccionar (`select`), filtrar (`filtrar`), modificar columnas (`mutate`}), agrupar (`group by` y `summarize`) y ordenar (`arrange`) entre otras.
+
+```{r}
+df %>%
+  filter(availability_365 > 10 & number_of_reviews > 100) %>%   # Filtramos los que tienen mas de 10 dias de disponibilidad y mas de 100 reviews
+  group_by(neighbourhood_group) %>%                       # Agrupamos por vecindario
+  summarise(precio_promedio = mean(price)) %>%              # Creamos una nueva columna a partir de cada grupo, llamada "precio_promedio"
+  arrange(-precio_promedio)                             # Ordenamos descendentemente por "precio_promedio"
+```
+Con `spread` podemos dejar los valores de una columna como varias columnas.
+
+```{r}
+df %>%
+  spread(key = neighbourhood_group, value = neighbourhood)
+
+```
+
+
+
 ## Clasificacion
+
+Vamos a ver dos ejemplos de como hacer clasificacion en R. Usaremos dos algoritmos, decision tree y k-NN.
+
+```{r,eval=FALSE}
+install.packages("caTools") 
+install.packages("rpart")
+install.packages("Metrics")
+install.packages("caret")
+install.packages("class")
+```
+
+
+```{r}
+library(datasets)
+library(caTools)
+library(rpart)
+library(Metrics)
+library(caret)
+library(class)
+```
+
+Primero separamos en train y test, con 75% de los datos para train y 25% para test.
+
+```{r}
+
+set.seed(1234)
+
+split <- sample.split(iris$Species, SplitRatio = 0.75)
+training_set <- subset(iris, split == TRUE)
+test_set <- subset(iris, split == FALSE)
+
+```
+
+
+
+Creamos nuestro clasificador decision tree:
+
+```{r}
+set.seed(1234)
+clasificadorDT <- rpart(Species ~ ., data = training_set) #crear decision tree
+```
+
+Predicimos y creamos la matriz de confusion para ver los resultados:
+
+```{r}
+pred_valid_DT <- predict(clasificadorDT, newdata = test_set, type = 'class') #predecir 
+
+matrizConfusion <- table(test_set$Species, pred_valid_DT)
+matrizConfusion
+```
+
+```{r}
+cm <- caret::confusionMatrix(matrizConfusion)
+cm
+```
+
+Ahora hagamos lo mismo con k-NN:
+
+```{r}
+
+set.seed(1234)
+pred_valid_knn <- knn(training_set[, -5], 
+                      test_set[, -5], 
+                      cl = training_set[, 5],
+                      k = 10)
+```
+
+```{r}
+matrizConfusion <- table(test_set$Species, pred_valid_knn)
+cm <- caret::confusionMatrix(matrizConfusion)
+cm
+```
+
+
+
+## Regresion
+
+## Clustering
 
 ## Texto
