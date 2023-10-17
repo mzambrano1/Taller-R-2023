@@ -1,0 +1,137 @@
+---
+title: "Taller R: Sesion 3"
+author: "Maria Jose Zambrano"
+date: "2023-10-16"
+output: html_document
+---
+
+En esta sesión vamos a ver como crear funciones, como aplicar funciones a dataframes, un poco más del manejo de los dataframes...
+
+
+## Funciones
+
+A veces queremos hacer algo muchas veces y estar escribiendo lo mismo una y tra vez no lo vale, así que gracias a dios tenemos funciones.
+
+En R las funciones tienen la siguiente estructura general:
+
+```{r, eval=FALSE}
+
+nombre_de_funcion <- function(par1, par2, ...) {
+  cuerpo
+  cuerpo
+  cuerpo
+  cuerpo
+  
+  return(resultado)
+}
+```
+
+```{r}
+
+suma <- function(x,y){
+  return (x+y)}
+
+suma(2,3)
+```
+
+```{r}
+min_max <- function(x,y){
+  if (x>y){
+    return(c("min"=y,"max"=x))
+  }
+  else{
+    return(c("min"=x,"max"=y))
+  }
+}
+
+min_max(5,3)
+```
+
+También les podemos oner parametros por defecto:
+
+```{r}
+suma2 <- function(x=2,y=3){
+  return (x+y)
+}
+
+suma2()
+suma(3,4)
+```
+
+
+
+En R las funciones son objetos, como un dataframe o un vector. O sea las podemos guardar en variables o vectores como si fueran cualquier cosa:
+
+```{r}
+s <- suma
+s
+s(5,6)
+v <- c(min_max,suma)
+v[[1]](5,7)
+```
+
+
+## Fecha y hora
+
+A veces nuestros datos viene con datos de fecha y hora y es necesarion poder manejarlas. Para esto podemos usar la libreria `lubridate`.
+
+```{r,eval=FALSE}
+install.packages("lubridate")
+```
+
+```{r}
+library(lubridate)
+```
+
+```{r}
+today()
+now()
+```
+
+podemos transformar strings en formato fecha-hora:
+
+```{r}
+ymd("2023-10-18")
+```
+
+o de numeros:
+```{r}
+ymd(20231-18)
+```
+
+y podemos pasar de fecha-hora a fecha.
+
+```{r}
+as_datetime(today())
+as_date(now())
+```
+
+Podemos también sacarle componentes:
+```{r}
+year(today())
+month(today())
+mday(today())
+yday(today())
+wday(today())
+```
+y le podemos pedir los nombres de los días o meses:
+```{r}
+month(today(), label = TRUE)
+wday(today(), label = TRUE, abbr = FALSE)
+```
+Podemos sumar días!
+
+```{r}
+today() + 5
+```
+## Merge
+Como los join en SQL, en R podemos juntar dos dataframes según alguna columna en comun, con merge
+
+## Alicar funciones a dataframes
+
+
+## Tidyverse
+
+## Clasificacion
+
+## Texto
