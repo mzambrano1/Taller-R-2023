@@ -239,7 +239,7 @@ Con `spread` podemos dejar los valores de una columna como varias columnas.
 ```{r}
 df %>%
   spread(key = neighbourhood_group, value = neighbourhood)
-
+head(df)
 ```
 
 
@@ -321,6 +321,22 @@ cm
 
 
 ## Regresion
+
+
+```{r}
+plot(iris$Sepal.Length,iris$Petal.Length)
+```
+
+```{r}
+reg <- lm(Petal.Length~Sepal.Length, data = iris)
+reg
+reg$coefficients
+```
+
+```{r}
+plot(iris$Sepal.Length,iris$Petal.Length)
+abline(reg, col="blue")
+```
 
 ## Clustering
 
