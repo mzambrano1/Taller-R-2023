@@ -237,9 +237,11 @@ df %>%
 Con `spread` podemos dejar los valores de una columna como varias columnas.
 
 ```{r}
-df %>%
+sp <-df %>%
   spread(key = neighbourhood_group, value = neighbourhood)
-head(df)
+
+head(sp)
+
 ```
 
 
@@ -322,10 +324,13 @@ cm
 
 ## Regresion
 
+R es muy útil para hacer regresiones, aquí vamos a ver un ejemplo con una regresión lineal.
+Usando el dataset iris, haremos una regresión las variables del largo del sepalo y petalo. Podemos ver como se relacionan en el siguiente grafico.
 
 ```{r}
 plot(iris$Sepal.Length,iris$Petal.Length)
 ```
+lm es la función para realizar una regresion lineal, esta nos encuentra los coeficientes de la recta a enocntrar.
 
 ```{r}
 reg <- lm(Petal.Length~Sepal.Length, data = iris)
@@ -333,11 +338,18 @@ reg
 reg$coefficients
 ```
 
+Ahora veamos como queda la recta con los datos:
+
 ```{r}
 plot(iris$Sepal.Length,iris$Petal.Length)
 abline(reg, col="blue")
 ```
+Y si queremos algo más complicado podemos agregarle variables a la regresión para hacer una multivariada:
 
-## Clustering
 
-## Texto
+```{r}
+lm(Petal.Length~Sepal.Length + Petal.Width, data = iris)
+```
+
+
+
