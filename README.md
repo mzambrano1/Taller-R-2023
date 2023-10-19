@@ -17,3 +17,5 @@ Taller de R para tutorías DII, Octubre 2023
 - Tutorial de R: https://users.dcc.uchile.cl/~mquezada/diplomado-2018/tutorial-datos.html
 - R para Data Science: https://r4ds.had.co.nz/
 - Strings Factores y fechas: https://rstudio-pubs-static.s3.amazonaws.com/407286_15ef411dce584b5d9cad31fb21c68067.html
+- Análisis de componentes principles: https://rpubs.com/Joaquin_AR/287787
+- Clustering: https://rpubs.com/Joaquin_AR/310338
