@@ -1,0 +1,273 @@
+---
+title: "Taller R:Sesion 4"
+author: "Maria Jose Zambrano"
+date: "2023-10-19"
+output: html_document
+---
+
+## Reduccion de dimensionalidad
+
+```{r}
+df <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/wine-clustering.csv")
+head(df)
+```
+
+
+
+```{r}
+pca <- prcomp(df, scale = TRUE)
+head(pca$x)
+```
+
+```{r}
+plot(pca$x[,1],pca$x[,2])
+```
+
+```{r,eval=FALSE}
+install.packages("tsne")
+```
+
+
+```{r}
+library(tsne)
+
+tsne <- tsne(df, k = 2, perplexity = 30, epoch = 100)
+head(tsne)
+```
+```{r}
+plot(tsne[,1],tsne[,2])
+```
+
+
+## Clustering
+
+```{r,eval=FALSE}
+install.packages("ggpubr")
+```
+
+
+```{r}
+
+set.seed(1234)
+wcss <- vector()
+for(i in 1:20){
+  wcss[i] <- sum(kmeans(df, i)$withinss)
+}
+
+
+ggplot() + geom_point(aes(x = 1:20, y = wcss), color = 'blue') + 
+  geom_line(aes(x = 1:20, y = wcss), color = 'blue') + 
+  ggtitle("Método del Codo") + 
+  xlab('Cantidad de Centroides k') + 
+  ylab('WCSS')
+```
+
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+
+km_clusters <- kmeans(x = df, centers = 3, nstart = 50)
+km_clusters
+```
+```{r}
+km_clusters$cluster
+```
+```{r}
+plot(pca$x[,1],pca$x[,2])
+```
+
+```{r}
+ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = km_clusters$cluster)) +
+  scale_colour_gradientn(colours=rainbow(4)) +
+  xlab('X') + ylab('Y')
+```
+
+```{r, eval=FALSE}
+install.packages("fpc")
+install.packages("dbscan")
+install.packages("factoextra")
+```
+
+
+```{r}
+library(fpc)
+library(dbscan)
+library(factoextra)
+
+dbscan::kNNdistplot(df, k = 5)
+```
+```{r}
+set.seed(321)
+
+
+dbscan_cluster <- fpc::dbscan(data = df, eps = 50, MinPts = 5)
+
+
+head(dbscan_cluster$cluster)
+```
+
+```{r}
+ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = dbscan_cluster$cluster)) +
+  scale_colour_gradientn(colours=rainbow(4)) +
+  xlab('X') + ylab('Y')
+```
+
+
+
+## Texto
+
+
+
+
+## Desarrollo web
+
+```{r,eval=FALSE}
+install.packages("shiny")
+install.packages("shinydashboard")
+```
+
+
+```{r}
+library(shiny)
+runExample("01_hello")
+```
+
+```{r}
+library(shiny)
+
+# Define UI for app that draws a histogram ----
+ui <- fluidPage(
+
+  # App title ----
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+
+    )
+  )
+)
+```
+
+
+
+Ejemplo de <https://www.diegocalvo.es/cuadro-mando-dashboard-shiny-r-app-r/>
+
+```{r,eval=FALSE}
+install.packages("shiny")
+install.packages("shinydashboard")
+```
+
+
+```{r}
+library(shiny)
+library(shinydashboard)
+
+
+ui <- dashboardPage(
+  dashboardHeader(
+    title = "Shiny"
+  ),
+  
+  dashboardSidebar(
+    sidebarMenu(id="sbmenu",
+      menuItem("menu1_",tabName = "menu1" ,
+        menuSubItem('Sub Menu 1', tabName = 'menu11'),
+        menuSubItem('Sub Menu 2', tabName = 'menu12'),
+        menuSubItem('Sub Menu 3', tabName = 'menu13')
+      ),
+      
+      menuItem("menu2_",tabName = "menu2" ,
+        menuSubItem('Sub Menu 1', tabName = 'menu21'),
+        menuSubItem('Sub Menu 2', tabName = 'menu22'),
+        menuSubItem('Sub Menu 3', tabName = 'menu23')
+      ),
+      
+      menuItem("menu3_",tabName = "menu3" ,
+        menuSubItem('Sub Menu 1', tabName = 'menu31'),
+        menuSubItem('Sub Menu 2', tabName = 'menu32'),
+        menuSubItem('Sub Menu 3', tabName = 'menu33')
+      ),
+      
+      menuItem("menu4_",tabName = "menu4" ,
+        menuSubItem('Sub Menu 1', tabName = 'menu41'),
+        menuSubItem('Sub Menu 2', tabName = 'menu42'),
+        menuSubItem('Sub Menu 3', tabName = 'menu43')
+      ),
+      
+      menuItem("menu5_",tabName = "menu5" ,
+        menuSubItem('Sub Menu 1', tabName = 'menu51'),
+        menuSubItem('Sub Menu 2', tabName = 'menu52'),
+        menuSubItem('Sub Menu 3', tabName = 'menu53')
+      ),
+      
+      menuItem("menu6_",tabName = "menu6",
+        menuSubItem('Sub Menu 1', tabName = 'menu61'),
+        menuSubItem('Sub Menu 2', tabName = 'menu62'),
+        menuSubItem('Sub Menu 3', tabName = 'menu63')
+      )
+    )
+  ),
+  
+  dashboardBody(
+    tabItems(
+      tabItem("menu11",h1("Pagina 1 en construccion")),
+      tabItem("menu12",h1("Pagina 2 en construccion")),
+      tabItem("menu13",h1("Pagina 3 en construccion")),
+      
+      tabItem("menu21",h1("Pagina 1 en construccion")),
+      tabItem("menu22",h1("Pagina 2 en construccion")),
+      tabItem("menu23",h1("Pagina 3 en construccion")),
+      
+      tabItem("menu31",h1("Pagina 1 en construccion")),
+      tabItem("menu32",h1("Pagina 2 en construccion")),
+      tabItem("menu33",h1("Pagina 3 en construccion")),
+      
+      tabItem("menu41",h1("Pagina 1 en construccion")),
+      tabItem("menu42",h1("Pagina 2 en construccion")),
+      tabItem("menu43",h1("Pagina 3 en construccion")),
+      
+      tabItem("menu51",h1("Pagina 1 en construccion")),
+      tabItem("menu52",h1("Pagina 2 en construccion")),
+      tabItem("menu53",h1("Pagina 3 en construccion")),
+      
+      tabItem("menu61",h1("Pagina 1 en construccion")),
+      tabItem("menu62",h1("Pagina 2 en construccion")),
+      tabItem("menu63",h1("Pagina 3 en construccion"))
+    )
+  )
+)
+
+server <- function(input, output) {
+  observe(print(input$sbmenu))
+}
+shinyApp(ui,server)
+```
+
+
+## Git
+
+Git es un sistema de control de versiones. Permite llevar un registro de la historia de cambios de lo que uno quiera, todo tipo de archivos, no solo código. <https://git-scm.com/downloads>
+
+
+Github es un servicio que permite llevar el control de versiones de un código fuente de forma colaborativa
+
