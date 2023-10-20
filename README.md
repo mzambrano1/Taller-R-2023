@@ -19,3 +19,4 @@ Taller de R para tutorías DII, Octubre 2023
 - Strings Factores y fechas: https://rstudio-pubs-static.s3.amazonaws.com/407286_15ef411dce584b5d9cad31fb21c68067.html
 - Análisis de componentes principles: https://rpubs.com/Joaquin_AR/287787
 - Clustering: https://rpubs.com/Joaquin_AR/310338
+- Más clustering: https://rpubs.com/rdelgado/399475
