@@ -5,28 +5,39 @@ date: "2023-10-19"
 output: html_document
 ---
 
+En nuestra ultima sesion del taller vamos a ver un poco de reduccion de dimensionalidad, clustering, como procesar texto, veremos un breve ejemplo de como hacer una aplicacion web con R y terminameros con una breve introduccion a git (no es R, pero es muy util). 
+
 ## Reduccion de dimensionalidad
+
+A veces nuestros datos tienen muchas dimensiones, lo que puede ser un poco incomodo y afectar los procesos que hacemos (maldision de la dimensionalidad), por eso hay tecnicas para reducir las dimensiones de los datos. Podemos eliminar columnas que tengan muchos nulos, algunas que no aporten mucha informacion o algunas columnas que estén muy relacionadas entre si. Tambien hay algoritmos, como PCA y TSNE que se encargan de capturar la parte mas importante de los datos, aquí veremos ejemplos de ambos con un dataset de vinos:
 
 ```{r}
 df <- read.csv("https://raw.githubusercontent.com/mzambrano1/Taller-R-2023/main/Datasets/wine-clustering.csv")
 head(df)
 ```
 
-
+Ejecutamos PCA:
 
 ```{r}
 pca <- prcomp(df, scale = TRUE)
 head(pca$x)
 ```
 
+
+Y Ahora podemos graficar los datos con dos diminesiones:
+
 ```{r}
 plot(pca$x[,1],pca$x[,2])
 ```
+
+Ahora veamos con tsne:
 
 ```{r,eval=FALSE}
 install.packages("tsne")
 ```
 
+
+Le decimos que queremos 2 dimensiones:
 
 ```{r}
 library(tsne)
@@ -34,6 +45,10 @@ library(tsne)
 tsne <- tsne(df, k = 2, perplexity = 30, epoch = 100)
 head(tsne)
 ```
+
+
+Y podemos graficar de nuevo:
+
 ```{r}
 plot(tsne[,1],tsne[,2])
 ```
@@ -41,12 +56,21 @@ plot(tsne[,1],tsne[,2])
 
 ## Clustering
 
+La sesion pasada vimos como hacer uso de algunos algoritmos de clasificacion en R, a esto se le llama aprendizaje supervisado, ya que se entrena un modelo para que aprenda a partir de datos etiquetados. El clustering es un tipo de aprendizaje no supervisado, porque no necesitamos que los datos esten etiquetados, los algoritmos se encarga de agrupar los datos que se aprecen entre si. Para esto hay distintos algoritmos, aqui veremos ejemplos con 2: K-means y dbscan.
+
+
 ```{r,eval=FALSE}
 install.packages("ggpubr")
 ```
 
 
+K-means agrupa los datos en K clusters. Para este algorimo es necesario darle el numero de clusters que se requieren, luego genera k centroides aleatorios en los datos y los va ajustando para que queden los mas centrales a los cluesters posible.
+
+Para determinar el numero de clusters que mejor se ajusta a los datos existe el metodo del codo, en el cual se calcula la distnacia media de los datos a se centroide y se va graficando esto, el numero optimo de clusters se tendra cuando se vea un "codo" en la linea:
+
+
 ```{r}
+library(ggplot2)
 
 set.seed(1234)
 wcss <- vector()
@@ -63,6 +87,8 @@ ggplot() + geom_point(aes(x = 1:20, y = wcss), color = 'blue') +
 ```
 
 
+Ahora que ya sabemos cuantos clusters necesitamos podemos ejecutar K-means:
+
 ```{r}
 library(tidyverse)
 library(ggpubr)
@@ -70,12 +96,12 @@ library(ggpubr)
 km_clusters <- kmeans(x = df, centers = 3, nstart = 50)
 km_clusters
 ```
+
 ```{r}
 km_clusters$cluster
 ```
-```{r}
-plot(pca$x[,1],pca$x[,2])
-```
+
+Y podemos ver graficamente como quedaron los clusters:
 
 ```{r}
 ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = km_clusters$cluster)) +
@@ -83,11 +109,18 @@ ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = km_clusters$clus
   xlab('X') + ylab('Y')
 ```
 
+
+Ahora veamos dbscan, este algoritmo encuentra cluster basados en densidad, o sea va buscando sectores de alta densidad de datos y los va agrupando, cuando encuentra que la densidad disminuye es que el cluster cambia. Este algoritmo no necesita que le demos el numero de cluster, lo encuentra solito, pero si requiere ajustar el parametro `eps` que nos dice que tan separados tienen que estar los puntos entre si para considerarse un clusters.
+
+
 ```{r, eval=FALSE}
 install.packages("fpc")
 install.packages("dbscan")
 install.packages("factoextra")
 ```
+
+
+Para ajustar este parametro existe el metodo de la rodilla, similar al del codo, cuando sea vea una "rodilla" es que se tiene el parametro optimo:
 
 
 ```{r}
@@ -97,6 +130,9 @@ library(factoextra)
 
 dbscan::kNNdistplot(df, k = 5)
 ```
+
+Ahora podemos ejecutar dbscan con nuestro eps encotrado:
+
 ```{r}
 set.seed(321)
 
@@ -106,6 +142,10 @@ dbscan_cluster <- fpc::dbscan(data = df, eps = 50, MinPts = 5)
 
 head(dbscan_cluster$cluster)
 ```
+
+
+Y verlo visualmente:
+
 
 ```{r}
 ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = dbscan_cluster$cluster)) +
@@ -214,63 +254,29 @@ ggplot(word_freq.sw[1:20,], aes(x = reorder(word, freq), y = freq)) +
 
 ## Desarrollo web
 
+La librería Shiny <https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html> nos permite crear aplicaciones web con R.
+
 ```{r,eval=FALSE}
 install.packages("shiny")
 install.packages("shinydashboard")
 ```
 
+Un ejemplo de la libreria:
 
-```{r}
+```{r,eval=FALSE}
 library(shiny)
 runExample("01_hello")
 ```
 
-```{r}
-library(shiny)
-
-# Define UI for app that draws a histogram ----
-ui <- fluidPage(
-
-  # App title ----
-  titlePanel("Hello Shiny!"),
-
-  # Sidebar layout with input and output definitions ----
-  sidebarLayout(
-
-    # Sidebar panel for inputs ----
-    sidebarPanel(
-
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
-
-    ),
-
-    # Main panel for displaying outputs ----
-    mainPanel(
-
-      # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
-
-    )
-  )
-)
-```
 
 
 
 Ejemplo de <https://www.diegocalvo.es/cuadro-mando-dashboard-shiny-r-app-r/>
 
+
+
+
 ```{r,eval=FALSE}
-install.packages("shiny")
-install.packages("shinydashboard")
-```
-
-
-```{r}
 library(shiny)
 library(shinydashboard)
 
@@ -365,7 +371,7 @@ comandos basicos:
 - git clone: clonar un repositorio que ya existe.
 - git status: estado del repositorio
 - git add <nombre archivo>: agregar archivo para el seguimiento
-- git commit -m "<mensaje>":  
+- git commit -m "<mensaje>":  Hacer un commit, ponerle nombre al cambio que se hace.
 - git push: subir lo cambios hechos
 - git pull: bajar los cambios a local
 
