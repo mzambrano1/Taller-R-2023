@@ -20,3 +20,4 @@ Taller de R para tutorías DII, Octubre 2023
 - Análisis de componentes principles: https://rpubs.com/Joaquin_AR/287787
 - Clustering: https://rpubs.com/Joaquin_AR/310338
 - Más clustering: https://rpubs.com/rdelgado/399475
+- TM (para texto): https://rpubs.com/tsholliger/301914
