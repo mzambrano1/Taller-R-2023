@@ -117,6 +117,98 @@ ggplot() + geom_point(aes(x = pca$x[,1], y = pca$x[,2], color = dbscan_cluster$c
 
 ## Texto
 
+Vamos a ver un poco de lo basico de como trabajar con texto. Para vamos a usar mensajes de redes sociales. (adapatación de tutorial de mineria de datos)
+
+```{r,eval=FALSE}
+install.packages("tm")
+```
+
+```{r}
+library(tm)
+```
+
+```{r}
+msj <- read.csv("http://users.dcc.uchile.cl/~hsarmien/mineria/datasets/messages.csv",sep = ";", quote = "\"'")
+head(msj)
+```
+Primero es necesario convertir los mensajes a un formato que pueda leer `tm` y luego creamos un corpus (coleccion de documentos).
+
+```{r}
+docs <- VectorSource(msj[, 2])
+docs <- VCorpus(docs)
+docs
+```
+```{r, eval=FALSE}
+inspect(docs)
+```
+
+
+
+Para poder trabajar con el texto es necesario realizar ciertos preprocesamientos, como remover puntuaciones, numeros, entre otras cosas para que estas cosas no nos molesten al tabajar:
+
+```{r}
+docs <- tm_map(docs, removePunctuation) #remover puntuacion
+docs <- tm_map(docs, removeNumbers) #remover numeros
+docs <- tm_map(docs, content_transformer(tolower)) #pasar todo a minuscula
+docs <- tm_map(docs, stripWhitespace) #sacar los espacios en blanco que son mas que dos
+docs <- tm_map(docs, content_transformer(gsub), pattern = "/", replacement = "")
+docs <- tm_map(docs, content_transformer(gsub), pattern = '[[:digit:]]+', replacement = "")  #elimina cualquier digito
+docs <- tm_map(docs, content_transformer(gsub), pattern = "/", replacement = "")
+docs <- tm_map(docs, content_transformer(gsub), pattern = '[[:digit:]]+', replacement = "")  #elimina cualquier digito
+removeSpecialChars <- function(x) gsub("[^ñÑa-zA-Z0-9 ]","",x) #remover mas caracteres especiales que no estaban en removePunctuation
+docs <- tm_map(docs, content_transformer(removeSpecialChars))
+
+```
+
+Ahora Podemos hacer una matriz documento-termino. Esta para cada documento nos dice la cantidad de veces que aparece cada palabra.
+
+```{r}
+dtm <- DocumentTermMatrix(docs)
+inspect(dtm)
+```
+```{r}
+dim(dtm)
+```
+Ahora podemos extraer los terminos mas frecuentes y ponerlos en un grafiquito:
+
+```{r}
+library(ggplot2)
+dtm.matrix <- as.matrix(dtm) 
+freq <- colSums(dtm.matrix)
+word_freq <- data.frame(word = names(freq), freq = freq, row.names = NULL)
+word_freq <- word_freq[order(-word_freq$freq),]
+ggplot(word_freq[1:20,], aes(x = reorder(word, freq), y = freq)) +
+          geom_bar(stat = "identity") + 
+          coord_flip()+
+          ggtitle(label = "Top-20 palabras de la colección")
+```
+
+```{r}
+head(stopwords("spanish"),20)
+```
+Squemos los stopwords:
+
+```{r}
+docs <- tm_map(docs, removeWords, stopwords("spanish"))
+stopwords_es <- read.table("https://users.dcc.uchile.cl/~hsarmien/mineria/datasets/stopwords_es.txt" , stringsAsFactors = F)
+stopwords_es$V1 <- iconv(stopwords_es$V1, from="latin1",to="ASCII//TRANSLIT")
+docs <- tm_map(docs, removeWords, stopwords_es$V1)
+```
+
+Veamos de nuevo las palabras mas frecuentes:
+
+```{r}
+dtm.sw <- DocumentTermMatrix(docs)
+dtm.sw.matrix <- as.matrix(dtm.sw)
+freq.sw <- colSums(dtm.sw.matrix)
+word_freq.sw <- data.frame(word = names(freq.sw), freq = freq.sw, row.names = NULL)
+word_freq.sw <- word_freq.sw[order(-word_freq.sw$freq),]
+
+ggplot(word_freq.sw[1:20,], aes(x = reorder(word, freq), y = freq)) +
+          geom_bar(stat = "identity") + 
+          coord_flip()+
+          ggtitle(label = "Top-20 palabras de la colección sin stopwords")
+```
 
 
 
@@ -268,6 +360,14 @@ shinyApp(ui,server)
 
 Git es un sistema de control de versiones. Permite llevar un registro de la historia de cambios de lo que uno quiera, todo tipo de archivos, no solo código. <https://git-scm.com/downloads>
 
+comandos basicos:
 
-Github es un servicio que permite llevar el control de versiones de un código fuente de forma colaborativa
+- git clone: clonar un repositorio que ya existe.
+- git status: estado del repositorio
+- git add <nombre archivo>: agregar archivo para el seguimiento
+- git commit -m "<mensaje>":  
+- git push: subir lo cambios hechos
+- git pull: bajar los cambios a local
+
+Github es un servicio que permite llevar el control de versiones de un código fuente de forma colaborativa.
 
