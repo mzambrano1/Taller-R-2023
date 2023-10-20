@@ -20,6 +20,7 @@ Ejecutamos PCA:
 
 ```{r}
 pca <- prcomp(df, scale = TRUE)
+pca
 head(pca$x)
 ```
 
@@ -66,7 +67,7 @@ install.packages("ggpubr")
 
 K-means agrupa los datos en K clusters. Para este algorimo es necesario darle el numero de clusters que se requieren, luego genera k centroides aleatorios en los datos y los va ajustando para que queden los mas centrales a los cluesters posible.
 
-Para determinar el numero de clusters que mejor se ajusta a los datos existe el metodo del codo, en el cual se calcula la distnacia media de los datos a se centroide y se va graficando esto, el numero optimo de clusters se tendra cuando se vea un "codo" en la linea:
+Para determinar el numero de clusters que mejor se ajusta a los datos existe el metodo del codo, en el cual se calcula la distancia media de los datos a se centroide y se va graficando esto, el numero optimo de clusters se tendra cuando se vea un "codo" en la linea:
 
 
 ```{r}
